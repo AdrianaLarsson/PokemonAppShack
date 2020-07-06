@@ -3,6 +3,7 @@ package se.appshack.android.refactoring
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ class PokemonListAdapter(private val activity: Activity, private val data: List<
     override fun onBindViewHolder(pokemonViewHolder: PokemonViewHolder, i: Int) {
         val responseModel = data[i]
         pokemonViewHolder.bind(responseModel)
+
         pokemonViewHolder.setOnClickListener(View.OnClickListener {
             val intent = Intent()
             intent.setClass(activity, PokemonDetailsActivity::class.java)
@@ -37,6 +39,14 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         (itemView.findViewById<View>(R.id.pokemon_number) as TextView).text = number
         val formattedName = pokemon.name!!.substring(0, 1).toUpperCase() + pokemon.name!!.substring(1)
         (itemView.findViewById<View>(R.id.pokemon_name) as TextView).text = formattedName
+
+        var spritesModel=PokemonSpritesModel()
+
+        Log.w("URL", "spritesModel.urlBack " + spritesModel.urlBack)
+
+
+
+
     }
 
     fun setOnClickListener(listener: View.OnClickListener?) {

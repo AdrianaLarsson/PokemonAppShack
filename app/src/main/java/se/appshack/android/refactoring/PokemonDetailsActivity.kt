@@ -3,6 +3,7 @@ package se.appshack.android.refactoring
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,10 +33,14 @@ class PokemonDetailsActivity : AppCompatActivity() {
                     .get()
                     .addHeader("Content-Type", "application/json; charset=utf8")
                     .build()
+
+          Log.w("URLS ", "URLSSS " + urls[0].toString())
             var response: PokemonDetailsResponse? = null
             try {
                 val httpResponse = client.newCall(request).execute()
                 val jsonBody = httpResponse.body!!.string()
+
+                Log.w("Success!!", " YES :  " + jsonBody)
                 response = Gson().fromJson(jsonBody, PokemonDetailsResponse::class.java)
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -49,6 +54,13 @@ class PokemonDetailsActivity : AppCompatActivity() {
             Picasso.with(this@PokemonDetailsActivity).load(result!!.sprites?.urlFront).into(imageFront)
             val imageBack = findViewById<View>(R.id.imageBack) as ImageView
             Picasso.with(this@PokemonDetailsActivity).load(result.sprites?.urlBack).into(imageBack)
+            Log.w("Success!!", " URL RESULT :  " + result.sprites)
+            Log.w("Success!!", " URL IMAGE :  " + result.sprites?.urlBack)
+
+
+
+
+
             (findViewById<View>(R.id.pokemonNumber) as TextView).text = String.format("#%s", result.id)
             val formattedName = result.name?.substring(0, 1)?.toUpperCase() + result.name?.substring(1)
             (findViewById<View>(R.id.pokemonName) as TextView).text = formattedName

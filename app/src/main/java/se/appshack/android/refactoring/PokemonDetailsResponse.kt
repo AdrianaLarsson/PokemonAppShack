@@ -17,4 +17,5 @@ internal class PokemonDetailsResponse {
     var types: List<PokemonTypeModel>? = null
     @SerializedName("sprites")
     var sprites: PokemonSpritesModel? = null
+
 }

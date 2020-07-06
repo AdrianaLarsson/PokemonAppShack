@@ -9,4 +9,9 @@ class NamedResponseModel {
     @JvmField
     @SerializedName("url")
     var url: String? = null
+
+    @SerializedName("sprites")
+    var sprites: PokemonSpritesModel? = null
+
+
 }
