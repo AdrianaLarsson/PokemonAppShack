@@ -20,48 +20,18 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 
     private lateinit var pokemonlist : MutableList<NamedResponseModel>
-
     private lateinit var pokemonAdapter: PokemonListAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
        val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
 
-      //  testRes()
-
     }
 
-fun testRes(){
-
-
-    val url = "https://pokeapi.co/api/v2/pokemon/?limit=151"
-    val client = OkHttpClient()
-    val request = Request.Builder()
-            .url(url)
-            .get()
-            .build()
-
-    client.newCall(request)
-            .enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.w("onFailure", "Didn't work! ")
-
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    val body = response.body?.string()
-                    Log.w("Success!!", " YES :  " + body)
-
-
-                }
-
-            })
-
-
-
-    }
 
 
    internal inner class GetPokemonListTask : AsyncTask<Void?, Void?, PokemonListResponse?>() {
@@ -121,9 +91,8 @@ fun testRes(){
 
 
             pokemonlist = pokemonModels
-
-
             getSearchString()
+
         }
 
     }
@@ -132,18 +101,13 @@ fun testRes(){
 
     fun getSearchString(){
 
-
+//get the text when the user writes something in editext
         var editTxtS = findViewById<EditText>(R.id.searchEdtxt)
 
         editTxtS.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
 
-                var resulyS = editTxtS.text.toString()
-
                 filterlist(s.toString())
-
-                Log.w("Resylt ", "Result search string " + resulyS)
-
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -162,25 +126,50 @@ fun testRes(){
 
     }
 
+    //filter text
     private fun filterlist(filterItem: String) {
-
-
         var tempList : MutableList<NamedResponseModel> = ArrayList()
-
-
         for (d in pokemonlist){
-
             if (filterItem in d.name.toString()){
-
                 tempList.add(d)
-
-
             }
-
-
-
         }
-
         pokemonAdapter.updateList(tempList)
     }
 }
+
+
+
+
+
+
+/*
+fun testRes(){
+
+
+    val url = "https://pokeapi.co/api/v2/pokemon/?limit=151"
+    val client = OkHttpClient()
+    val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+    client.newCall(request)
+            .enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    Log.w("onFailure", "Didn't work! ")
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val body = response.body?.string()
+                    Log.w("Success!!", " YES :  " + body)
+
+
+                }
+
+            })
+
+
+
+}*/

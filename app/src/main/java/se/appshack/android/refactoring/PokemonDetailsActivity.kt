@@ -1,29 +1,40 @@
 package se.appshack.android.refactoring
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_details.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 import java.util.*
 
 class PokemonDetailsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+
         val intent = intent
         val pokemonName = intent.extras.getString("POKEMON_NAME")
-        title = pokemonName.toUpperCase()
+        var namePokeUpper = pokemonName.toUpperCase()
+        txtVNamePokemonDetail.text = namePokeUpper
+
+
+
         val pokemonUrl = intent.extras.getString("POKEMON_URL")
         val detailsTask = GetPokemonDetailsTask()
         detailsTask.execute(pokemonUrl)
+
+        btnbackMainAct()
     }
     internal inner class GetPokemonDetailsTask : AsyncTask<String?, Void?, PokemonDetailsResponse?>() {
         override fun doInBackground(vararg urls: String?): PokemonDetailsResponse? {
@@ -50,10 +61,15 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: PokemonDetailsResponse?) {
             super.onPostExecute(result)
+
+
             val imageFront = findViewById<View>(R.id.imageFront) as ImageView
-            Picasso.with(this@PokemonDetailsActivity).load(result!!.sprites?.urlFront).into(imageFront)
+         Picasso.with(this@PokemonDetailsActivity).load(result!!.sprites?.urlFront).into(imageFront)
             val imageBack = findViewById<View>(R.id.imageBack) as ImageView
             Picasso.with(this@PokemonDetailsActivity).load(result.sprites?.urlBack).into(imageBack)
+
+
+
             Log.w("Success!!", " URL RESULT :  " + result.sprites)
             Log.w("Success!!", " URL IMAGE :  " + result.sprites?.urlBack)
 
@@ -62,6 +78,25 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
             (findViewById<View>(R.id.pokemonNumber) as TextView).text = String.format("#%s", result.id)
+
+            pokemonNumber.setOnClickListener {
+
+                pokemonNumber.textSize = 30F
+
+
+            }
+
+            if (pokemonNumber.textSize.equals(60F)){
+                pokemonNumber.setOnClickListener {
+                    pokemonNumber.textSize = 16F
+                }
+
+            }
+
+
+
+
+
             val formattedName = result.name?.substring(0, 1)?.toUpperCase() + result.name?.substring(1)
             (findViewById<View>(R.id.pokemonName) as TextView).text = formattedName
             Collections.sort(result.types) { pokemonTypeModel, t1 -> pokemonTypeModel.slot - t1.slot }
@@ -115,6 +150,20 @@ class PokemonDetailsActivity : AppCompatActivity() {
             findViewById<View>(R.id.loader).visibility = View.GONE
         }
         }
+
+
+    fun btnbackMainAct(){
+
+        backImgV.setOnClickListener {
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
+
+    }
 
 
     }
