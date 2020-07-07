@@ -5,14 +5,24 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.EditText
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var pokemonlist : MutableList<NamedResponseModel>
+
+    private lateinit var pokemonAdapter: PokemonListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -81,6 +91,8 @@ fun testRes(){
 
         override fun onPostExecute(result: PokemonListResponse?) {
             super.onPostExecute(result)
+
+
             val pokemonModels: MutableList<NamedResponseModel> = ArrayList()
             val ids: MutableList<Int> = ArrayList()
             var i = 0
@@ -98,11 +110,77 @@ fun testRes(){
                 pokemonModels.add(result?.results?.get(i - 1)!!)
 
             }
-            val pokemonAdapter = PokemonListAdapter(this@MainActivity, pokemonModels)
+             pokemonAdapter = PokemonListAdapter(this@MainActivity, pokemonModels)
+
+
+            Log.w("pokemonModels", "pokemonModels ____" + pokemonModels.toString())
             val recyclerView = findViewById<View>(R.id.recyclerview) as RecyclerView
             recyclerView.adapter = pokemonAdapter
             recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
             findViewById<View>(R.id.loader).visibility = View.GONE
+
+
+            pokemonlist = pokemonModels
+
+
+            getSearchString()
         }
+
+    }
+
+
+
+    fun getSearchString(){
+
+
+        var editTxtS = findViewById<EditText>(R.id.searchEdtxt)
+
+        editTxtS.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+                var resulyS = editTxtS.text.toString()
+
+                filterlist(s.toString())
+
+                Log.w("Resylt ", "Result search string " + resulyS)
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+
+        })
+
+
+
+
+    }
+
+    private fun filterlist(filterItem: String) {
+
+
+        var tempList : MutableList<NamedResponseModel> = ArrayList()
+
+
+        for (d in pokemonlist){
+
+            if (filterItem in d.name.toString()){
+
+                tempList.add(d)
+
+
+            }
+
+
+
+        }
+
+        pokemonAdapter.updateList(tempList)
     }
 }

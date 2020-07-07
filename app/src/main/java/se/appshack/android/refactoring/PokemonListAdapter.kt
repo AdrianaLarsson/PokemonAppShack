@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class PokemonListAdapter(private val activity: Activity, private val data: List<NamedResponseModel>) : RecyclerView.Adapter<PokemonViewHolder>() {
+class PokemonListAdapter(private val activity: Activity,  private var data: List<NamedResponseModel>) : RecyclerView.Adapter<PokemonViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PokemonViewHolder {
         return PokemonViewHolder(LayoutInflater.from(activity).inflate(R.layout.viewholder_pokemon_list, null, false))
     }
@@ -31,9 +31,18 @@ class PokemonListAdapter(private val activity: Activity, private val data: List<
         return data.size
     }
 
+    fun updateList(list: MutableList<NamedResponseModel>){
+
+        data = list
+        notifyDataSetChanged()
+
+
+    }
+
 }
 
 class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
     fun bind(pokemon: NamedResponseModel) {
         val number = String.format("#%s", pokemon.url!!.substring(pokemon.url!!.indexOf("pokemon/") + 8, pokemon.url!!.length - 1))
         (itemView.findViewById<View>(R.id.pokemon_number) as TextView).text = number
@@ -52,4 +61,8 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setOnClickListener(listener: View.OnClickListener?) {
         itemView.setOnClickListener(listener)
     }
+
+
+
+
 }
