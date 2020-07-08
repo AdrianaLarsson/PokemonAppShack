@@ -1,7 +1,7 @@
 package se.appshack.android.refactoring
 
+import android.content.Context
 import android.os.AsyncTask
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -10,13 +10,15 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.google.gson.Gson
-import okhttp3.*
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -123,13 +125,6 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            editTxtS.showSoftInputOnFocus = false
-            editTxtS.showSoftInputOnFocus = false
-        } else {
-            editTxtS.setTextIsSelectable(true)
-            editTxtS.setTextIsSelectable(true)
-        }
 
 
     }
