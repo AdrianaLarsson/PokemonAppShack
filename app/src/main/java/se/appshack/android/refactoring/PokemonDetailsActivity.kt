@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
@@ -16,6 +17,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 import java.util.*
+
 
 class PokemonDetailsActivity : AppCompatActivity() {
 
@@ -36,6 +38,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
         btnbackMainAct()
         imageAni()
+
     }
     internal inner class GetPokemonDetailsTask : AsyncTask<String?, Void?, PokemonDetailsResponse?>() {
         override fun doInBackground(vararg urls: String?): PokemonDetailsResponse? {
@@ -69,25 +72,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
             val imageBack = findViewById<View>(R.id.imageBack) as ImageView
             Picasso.with(this@PokemonDetailsActivity).load(result.sprites?.urlBack).into(imageBack)
 
-
-
-
-//changes text size
             (findViewById<View>(R.id.pokemonNumber) as TextView).text = String.format("#%s", result.id)
-            pokemonNumber.setOnClickListener {
-                pokemonNumber.textSize = 30F
-
-            }
-            if (pokemonNumber.textSize.equals(60F)){
-                pokemonNumber.setOnClickListener {
-                    pokemonNumber.textSize = 16F
-                }
-
-            }
-
-
-
-
 
 
 
@@ -100,13 +85,23 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 types += typeModel?.type?.name!!.substring(0, 1).toUpperCase() + typeModel.type!!.name!!.substring(1)
                 if (i < result!!.types!!.size - 1) types += ", "
             }
+
+
+            postToRealTimeFirebase(result.name.toString(),
+                    result.id.toString(),
+                    result.species.toString(),
+                    result.types.toString(),
+                    result.height.toString(),result.weight.toString(),
+            result.sprites!!.urlFront.toString(),
+            result.sprites!!.urlBack.toString())
+            textSize()
+
             (findViewById<View>(R.id.pokemonTypes) as TextView).text = types
             (findViewById<View>(R.id.pokemonHeight) as TextView).text = String.format("%s decimetres", result.height)
             (findViewById<View>(R.id.pokemonWeight) as TextView).text = String.format("%s hectograms", result.weight)
             GetPokemonSpeciesDetailsTask().execute(result.species?.url)
 
         }
-
 
 
 
@@ -159,21 +154,58 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
     }
 
+    //changes text size
+    fun textSize(){
+
+        pokemonNumber.setOnClickListener {
+            pokemonNumber.textSize = 30F
+
+        }
+        if (pokemonNumber.textSize.equals(60F)){
+            pokemonNumber.setOnClickListener {
+                pokemonNumber.textSize = 16F
+            }
+
+        }
+
+    }
+
+    //animation to the images
     fun imageAni(){
-
-
 
             val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.animation)
             imageFront.startAnimation(anim)
             imageBack.startAnimation(anim)
 
 
+       }
+
+
+    fun postToRealTimeFirebase(name : String, number : String,species : String, types: String, height : String , weight : String , imageFront: String, imageBack : String){
+
+        val db = FirebaseDatabase.getInstance()
+        val myRef = db.getReference("MyPokemonList")
+
+        val pokemon = PokemonFirebase(
+                name,
+                number,
+                species,
+                types,
+                height,
+                weight,
+                imageFront,
+                imageBack
+
+        )
+
+        val pushKey = myRef.push().key!!
+        myRef.child(pushKey).setValue(pokemon)
 
     }
 
 
 
-    }
+}
 
 
 
