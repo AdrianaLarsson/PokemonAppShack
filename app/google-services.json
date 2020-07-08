@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "656578892517",
+    "firebase_url": "https://apppokemon-b00e9.firebaseio.com",
+    "project_id": "apppokemon-b00e9",
+    "storage_bucket": "apppokemon-b00e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656578892517:android:6b7aabc3091baa1b9afa0c",
+        "android_client_info": {
+          "package_name": "se.appshack.android.refactoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656578892517-osgadusarmd1t18eig1t1jvp7ap7n95h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "se.appshack.android.refactoring",
+            "certificate_hash": "71dd76790ee30acd2e283dd904ca6d23a323d608"
+          }
+        },
+        {
+          "client_id": "656578892517-ekvveoh0u3ursudd3oj9d2datq6aq3ng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD82C-FRCii5l4geFMiauXB2qeXNVi5xE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656578892517-ekvveoh0u3ursudd3oj9d2datq6aq3ng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

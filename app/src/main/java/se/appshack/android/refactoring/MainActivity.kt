@@ -1,6 +1,7 @@
 package se.appshack.android.refactoring
 
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -122,6 +123,13 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            editTxtS.showSoftInputOnFocus = false
+            editTxtS.showSoftInputOnFocus = false
+        } else {
+            editTxtS.setTextIsSelectable(true)
+            editTxtS.setTextIsSelectable(true)
+        }
 
 
     }

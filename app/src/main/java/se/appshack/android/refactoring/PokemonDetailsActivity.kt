@@ -35,6 +35,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
         detailsTask.execute(pokemonUrl)
 
         btnbackMainAct()
+        imageAni()
     }
     internal inner class GetPokemonDetailsTask : AsyncTask<String?, Void?, PokemonDetailsResponse?>() {
         override fun doInBackground(vararg urls: String?): PokemonDetailsResponse? {
@@ -70,28 +71,21 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
 
-            Log.w("Success!!", " URL RESULT :  " + result.sprites)
-            Log.w("Success!!", " URL IMAGE :  " + result.sprites?.urlBack)
 
-
-
-
-
+//changes text size
             (findViewById<View>(R.id.pokemonNumber) as TextView).text = String.format("#%s", result.id)
-
             pokemonNumber.setOnClickListener {
-
                 pokemonNumber.textSize = 30F
 
-
             }
-
             if (pokemonNumber.textSize.equals(60F)){
                 pokemonNumber.setOnClickListener {
                     pokemonNumber.textSize = 16F
                 }
 
             }
+
+
 
 
 
@@ -151,7 +145,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
         }
         }
 
-
+//back button to recyclerview
     fun btnbackMainAct(){
 
         backImgV.setOnClickListener {
@@ -164,6 +158,19 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
     }
+
+    fun imageAni(){
+
+
+
+            val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.animation)
+            imageFront.startAnimation(anim)
+            imageBack.startAnimation(anim)
+
+
+
+    }
+
 
 
     }
