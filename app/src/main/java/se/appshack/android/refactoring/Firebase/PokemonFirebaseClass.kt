@@ -1,6 +1,6 @@
-package se.appshack.android.refactoring
+package se.appshack.android.refactoring.Firebase
 
-data class PokemonFirebase (
+data class PokemonFirebaseClass (
 
         var name : String,
         var number : String,
