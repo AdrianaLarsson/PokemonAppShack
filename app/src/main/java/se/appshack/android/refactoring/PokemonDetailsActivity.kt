@@ -29,9 +29,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
         val pokemonName = intent.extras.getString("POKEMON_NAME")
         var namePokeUpper = pokemonName.toUpperCase()
         txtVNamePokemonDetail.text = namePokeUpper
-
-
-
         val pokemonUrl = intent.extras.getString("POKEMON_URL")
         val detailsTask = GetPokemonDetailsTask()
         detailsTask.execute(pokemonUrl)
@@ -84,22 +81,32 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 val typeModel = result.types?.get(i)
                 types += typeModel?.type?.name!!.substring(0, 1).toUpperCase() + typeModel.type!!.name!!.substring(1)
                 if (i < result!!.types!!.size - 1) types += ", "
+
+
+
+
             }
-
-
-            postToRealTimeFirebase(result.name.toString(),
-                    result.id.toString(),
-                    result.species.toString(),
-                    result.types.toString(),
-                    result.height.toString(),result.weight.toString(),
-            result.sprites!!.urlFront.toString(),
-            result.sprites!!.urlBack.toString())
             textSize()
-
             (findViewById<View>(R.id.pokemonTypes) as TextView).text = types
             (findViewById<View>(R.id.pokemonHeight) as TextView).text = String.format("%s decimetres", result.height)
             (findViewById<View>(R.id.pokemonWeight) as TextView).text = String.format("%s hectograms", result.weight)
             GetPokemonSpeciesDetailsTask().execute(result.species?.url)
+
+
+
+            //add info about pokemon in firebase
+            imgBtnAddList.setOnClickListener {
+                postToRealTimeFirebase(result.name.toString(),
+                        result.id.toString(),
+                        types,
+                        result.height.toString(),
+                        result.weight.toString(),
+                        result.sprites!!.urlFront.toString(),
+                        result.sprites!!.urlBack.toString())
+            }
+
+
+
 
         }
 
@@ -181,7 +188,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
        }
 
 
-    fun postToRealTimeFirebase(name : String, number : String,species : String, types: String, height : String , weight : String , imageFront: String, imageBack : String){
+    fun postToRealTimeFirebase(name : String, number : String, types: String, height : String , weight : String , imageFront: String, imageBack : String){
 
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference("MyPokemonList")
@@ -189,7 +196,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
         val pokemon = PokemonFirebase(
                 name,
                 number,
-                species,
                 types,
                 height,
                 weight,
@@ -197,6 +203,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 imageBack
 
         )
+
 
         val pushKey = myRef.push().key!!
         myRef.child(pushKey).setValue(pokemon)

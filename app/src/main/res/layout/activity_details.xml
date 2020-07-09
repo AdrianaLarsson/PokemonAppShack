@@ -20,6 +20,12 @@
             android:layout_gravity="start|right|left"
             app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
+        <ImageView
+            android:id="@+id/imgBtnAddList"
+            android:layout_width="138dp"
+            android:layout_height="42dp"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+
         <TextView
             android:id="@+id/txtVNamePokemonDetail"
             android:layout_width="250dp"

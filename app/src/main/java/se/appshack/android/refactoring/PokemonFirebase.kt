@@ -4,7 +4,6 @@ data class PokemonFirebase (
 
         var name : String,
         var number : String,
-        var species : String,
         var types: String,
         var height : String,
         var weight : String,
