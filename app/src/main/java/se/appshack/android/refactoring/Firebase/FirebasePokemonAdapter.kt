@@ -36,7 +36,7 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
         var pNumber = holder.itemView.numberPokemon
         var pimgFront = holder.itemView.imgPokemonFront
         pName.text = pokemons.name
-        pNumber.text = pokemons.number
+        pNumber.text = "# " + pokemons.number
         var imageUrlFront = pokemons.imageFront
        Picasso.with(context).load(imageUrlFront).into(pimgFront)
 
