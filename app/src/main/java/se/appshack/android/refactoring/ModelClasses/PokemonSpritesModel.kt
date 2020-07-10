@@ -1,4 +1,4 @@
-package se.appshack.android.refactoring
+package se.appshack.android.refactoring.ModelClasses
 
 import com.google.gson.annotations.SerializedName
 

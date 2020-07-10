@@ -15,9 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Firebase.MyPokemonListActivity"></activity>
+        <activity android:name=".Activities.MyPokemonListActivity"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PokemonDetailsActivity"
+            android:name=".Activities.PokemonDetailsActivity"
             android:label="@string/title_activity_pokemon_details"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>

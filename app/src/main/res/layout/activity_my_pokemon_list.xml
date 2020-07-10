@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundpokemon"
-    tools:context=".Firebase.MyPokemonListActivity">
+    tools:context=".Activities.MyPokemonListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mylistrecyclerView"
@@ -30,8 +30,14 @@
         android:layout_height="177dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/pokemonlist"
+        android:gravity="center|top"
+        android:text="My"
+        android:textColor="#009688"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/mylistrecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

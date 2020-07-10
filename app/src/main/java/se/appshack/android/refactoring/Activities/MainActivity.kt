@@ -1,8 +1,10 @@
-package se.appshack.android.refactoring
+package se.appshack.android.refactoring.Activities
 
-import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -10,11 +12,14 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import se.appshack.android.refactoring.NamedResponseModel
+import se.appshack.android.refactoring.Adapters.PokemonListAdapter
+import se.appshack.android.refactoring.PokemonListResponse
+import se.appshack.android.refactoring.R
 import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
@@ -32,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
        val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
+        navigationBar()
 
     }
 
@@ -139,6 +145,39 @@ class MainActivity : AppCompatActivity() {
         }
         pokemonAdapter.updateList(tempList)
     }
+
+
+
+    fun navigationBar(){
+
+        var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        navigationView.selectedItemId = R.id.searchPokemon
+
+        navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+
+            when (it.itemId) {
+                R.id.myMyPokemonList -> {
+
+                    var intent = Intent(this, MyPokemonListActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+
+                    return@OnNavigationItemSelectedListener true
+                }
+
+
+
+
+            }
+
+            true
+        })
+
+
+
+    }
+
+
 }
 
 

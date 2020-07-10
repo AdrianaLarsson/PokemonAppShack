@@ -1,6 +1,7 @@
 package se.appshack.android.refactoring
 
 import com.google.gson.annotations.SerializedName
+import se.appshack.android.refactoring.ModelClasses.PokemonSpritesModel
 
 class NamedResponseModel {
     @JvmField

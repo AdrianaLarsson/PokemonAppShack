@@ -1,4 +1,4 @@
-package se.appshack.android.refactoring
+package se.appshack.android.refactoring.Activities
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -15,8 +15,10 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import se.appshack.android.refactoring.Firebase.MyPokemonListActivity
-import se.appshack.android.refactoring.Firebase.PokemonFirebaseClass
+import se.appshack.android.refactoring.PokemonDetailsResponse
+import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
+import se.appshack.android.refactoring.PokemonSpeciesResponse
+import se.appshack.android.refactoring.R
 import java.io.IOException
 import java.util.*
 

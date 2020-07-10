@@ -1,4 +1,4 @@
-package se.appshack.android.refactoring.Firebase
+package se.appshack.android.refactoring.Adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_firebase_list.view.*
+import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
 import se.appshack.android.refactoring.R
-import java.text.FieldPosition
 
 
 class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonFirebaseClass>) : RecyclerView.Adapter<FirebasePokemonAdapter.PokemonFirebaseViewHolder>(){

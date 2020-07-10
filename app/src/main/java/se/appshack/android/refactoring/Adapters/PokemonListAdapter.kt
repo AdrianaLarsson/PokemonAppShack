@@ -1,4 +1,4 @@
-package se.appshack.android.refactoring
+package se.appshack.android.refactoring.Adapters
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import se.appshack.android.refactoring.Activities.PokemonDetailsActivity
+import se.appshack.android.refactoring.NamedResponseModel
+import se.appshack.android.refactoring.ModelClasses.PokemonSpritesModel
+import se.appshack.android.refactoring.R
 
 class PokemonListAdapter(private val activity: Activity,  private var data: List<NamedResponseModel>) : RecyclerView.Adapter<PokemonViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PokemonViewHolder {
@@ -49,7 +53,7 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val formattedName = pokemon.name!!.substring(0, 1).toUpperCase() + pokemon.name!!.substring(1)
         (itemView.findViewById<View>(R.id.pokemon_name) as TextView).text = formattedName
 
-        var spritesModel=PokemonSpritesModel()
+        var spritesModel= PokemonSpritesModel()
 
         Log.w("URL", "spritesModel.urlBack " + spritesModel.urlBack)
 
