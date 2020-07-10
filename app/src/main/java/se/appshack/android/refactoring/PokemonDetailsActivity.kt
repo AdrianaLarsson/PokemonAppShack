@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import se.appshack.android.refactoring.Firebase.MyPokemonListActivity
 import se.appshack.android.refactoring.Firebase.PokemonFirebaseClass
 import java.io.IOException
 import java.util.*
@@ -104,6 +105,11 @@ class PokemonDetailsActivity : AppCompatActivity() {
                         result.weight.toString(),
                         result.sprites!!.urlFront.toString(),
                         result.sprites!!.urlBack.toString())
+
+                val intent = Intent()
+                intent.setClass(applicationContext, MyPokemonListActivity::class.java)
+                startActivity(intent)
+
             }
 
 

@@ -38,7 +38,6 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
         pNumber.text = pokemons.number
 
 
-
     }
 
 
