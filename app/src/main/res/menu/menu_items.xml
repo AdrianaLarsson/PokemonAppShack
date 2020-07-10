@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-
         <item
-            android:id="@+id/myMyPokemonList"
-            android:title="Mina Pokemons" />
+            android:id="@+id/settings"
+            android:title="Min sida"
+            />
+
         <item
             android:id="@+id/searchPokemon"
             android:title="Sök Pokemons"
 
             />
+
+
         <item
-            android:id="@+id/settings"
-            android:title="Inställningar"
-            />
-
-
+            android:id="@+id/myMyPokemonList"
+            android:title="Mina Pokemons" />
 
 </menu>

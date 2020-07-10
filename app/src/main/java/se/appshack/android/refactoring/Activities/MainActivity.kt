@@ -3,7 +3,6 @@ package se.appshack.android.refactoring.Activities
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.support.design.internal.BottomNavigationItemView
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -148,36 +147,50 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    fun navigationBar(){
+        fun navigationBar(){
 
-        var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        navigationView.selectedItemId = R.id.searchPokemon
+            var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            navigationView.selectedItemId = R.id.searchPokemon
 
-        navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+            navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
 
-            when (it.itemId) {
-                R.id.myMyPokemonList -> {
+                when (it.itemId) {
+                    R.id.myMyPokemonList -> {
 
-                    var intent = Intent(this, MyPokemonListActivity::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                    startActivity(intent)
+                        var intent = Intent(this, MyPokemonListActivity::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                        startActivity(intent)
 
-                    return@OnNavigationItemSelectedListener true
+                        return@OnNavigationItemSelectedListener true
+                    }
+
+
+
+
+
+
                 }
+                when (it.itemId) {
+                    R.id.settings -> {
+
+                        var intent = Intent(this, MySideSettingsActivity::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                        startActivity(intent)
+
+                        return@OnNavigationItemSelectedListener true
+                    }
 
 
 
+                }
+                true
 
-            }
 
-            true
+
         })
 
 
-
     }
-
-
 }
 
 

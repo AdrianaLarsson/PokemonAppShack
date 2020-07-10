@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activities.MyPokemonListActivity"></activity>
+        <activity android:name=".Activities.MySideSettingsActivity"></activity>
+        <activity android:name=".Activities.MyPokemonListActivity" />
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main"
@@ -32,7 +33,7 @@
             android:name=".Activities.PokemonDetailsActivity"
             android:label="@string/title_activity_pokemon_details"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
