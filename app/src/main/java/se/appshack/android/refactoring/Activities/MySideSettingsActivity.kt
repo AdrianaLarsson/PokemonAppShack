@@ -42,7 +42,7 @@ class MySideSettingsActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.searchPokemon -> {
 
-                    var intent = Intent(this, MySideSettingsActivity::class.java)
+                    var intent = Intent(this, MainActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
 

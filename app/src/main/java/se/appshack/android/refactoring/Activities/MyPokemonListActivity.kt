@@ -1,7 +1,9 @@
 package se.appshack.android.refactoring.Activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -20,6 +22,7 @@ class MyPokemonListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_my_pokemon_list)
 
         readPokemonListFromFirebase()
+        navigationBar()
     }
 
 
@@ -63,6 +66,53 @@ class MyPokemonListActivity : AppCompatActivity() {
 
 
 
+
+
+    }
+
+
+
+    fun navigationBar(){
+
+        var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationMyList)
+        navigationView.selectedItemId = R.id.myMyPokemonList
+
+        navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+
+            when (it.itemId) {
+                R.id.searchPokemon -> {
+
+                    var intent = Intent(this, MainActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+
+                    return@OnNavigationItemSelectedListener true
+                }
+
+
+
+
+
+
+            }
+            when (it.itemId) {
+                R.id.settings -> {
+
+                    var intent = Intent(this, MySideSettingsActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+
+                    return@OnNavigationItemSelectedListener true
+                }
+
+
+
+            }
+            true
+
+
+
+        })
 
 
     }
