@@ -4,18 +4,22 @@
 
         <item
             android:id="@+id/settings"
-            android:title="Min sida"
+            android:title=""
+            android:icon="@drawable/ic_person_outline_black_24dp"
             />
 
         <item
             android:id="@+id/searchPokemon"
-            android:title="Sök Pokemons"
+            android:title=""
+            android:icon="@drawable/ic_search_black_24dp"
+
 
             />
 
 
         <item
             android:id="@+id/myMyPokemonList"
-            android:title="Mina Pokemons" />
+            android:icon="@drawable/ic_pokeball"
+            android:title="" />
 
 </menu>

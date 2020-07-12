@@ -60,8 +60,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="-5dp"
         android:background="#FFFFFF"
+        app:itemIconSize="35sp"
         app:menu="@menu/menu_items" />
 
 </RelativeLayout>
