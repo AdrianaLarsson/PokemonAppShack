@@ -18,7 +18,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" >
+
+    </android.support.v7.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/sadNolist"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sadpoke"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/mylistrecyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/mylistrecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/mylistrecyclerView"
+        app:layout_constraintTop_toTopOf="@+id/mylistrecyclerView" />
 
     <TextView
         android:id="@+id/textView"

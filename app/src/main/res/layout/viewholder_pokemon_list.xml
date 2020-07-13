@@ -21,6 +21,16 @@
         app:cardElevation="2dp"
         app:contentPadding="5dp">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="36dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="340dp"
+            android:layout_marginTop="40dp"
+            android:layout_weight="1"
+            android:tint="#FFD83B"
+            app:srcCompat="@drawable/plus" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,8 +54,8 @@
 
                 <TextView
                     android:id="@+id/pokemon_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_width="269dp"
+                    android:layout_height="match_parent"
                     android:padding="5dp"
                     android:text="Name"
                     android:textAlignment="center"

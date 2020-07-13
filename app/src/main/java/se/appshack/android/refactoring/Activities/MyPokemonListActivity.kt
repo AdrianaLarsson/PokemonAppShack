@@ -7,10 +7,12 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_my_pokemon_list.*
 import se.appshack.android.refactoring.Adapters.FirebasePokemonAdapter
 import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
 import se.appshack.android.refactoring.R
@@ -37,7 +39,6 @@ class MyPokemonListActivity : AppCompatActivity() {
 
 
                 val value = dataSnapshot.getValue(PokemonFirebaseClass::class.java)
-                Log.d("DataSnapshot : ", "Value IS: " + value!!)
 
                 var pokemonList = ArrayList<PokemonFirebaseClass>()
 
@@ -51,6 +52,16 @@ class MyPokemonListActivity : AppCompatActivity() {
                 var recyView = findViewById<RecyclerView>(R.id.mylistrecyclerView) as RecyclerView
 
                 Log.w("SUCCESSS", "ARRAYLIST!!!" + pokemonList)
+
+
+
+                if (pokemonList.isEmpty()){
+
+                    Log.w("EMPTY", "Pokemon list is empty")
+
+                    sadNolist.visibility = View.VISIBLE
+
+                }
                 val layoutManager = LinearLayoutManager(this@MyPokemonListActivity)
                layoutManager.orientation = LinearLayoutManager.VERTICAL
                 recyView.layoutManager = layoutManager
