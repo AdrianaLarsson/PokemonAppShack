@@ -35,6 +35,12 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    public override fun onStart() {
+        super.onStart()
+
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+    }
 
     private fun doLogin() {
 
@@ -95,6 +101,16 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onBackPressed() {
+        val mUser = FirebaseAuth.getInstance().currentUser
+        if (mUser == null) {
+            val a = Intent(Intent.ACTION_MAIN)
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+        }
     }
 
 

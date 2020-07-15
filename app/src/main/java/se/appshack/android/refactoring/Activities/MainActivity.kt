@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -37,6 +38,23 @@ class MainActivity : AppCompatActivity() {
        val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
         navigationBar()
+
+
+        val mUser = FirebaseAuth.getInstance().currentUser
+        if (mUser != null) {
+            mUser.getIdToken(true)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val idToken = task.result?.token
+
+                            Log.w("IdToken", "Token  === >>> " + idToken)
+                            // ...
+                        } else { // Handle error -> task.getException();
+
+                            Log.w("wrong", "wrongwrong" )
+                        }
+                    }
+        }
 
     }
 
@@ -191,6 +209,10 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
 }
 
 
