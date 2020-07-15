@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
@@ -78,7 +79,8 @@ class LoginActivity : AppCompatActivity() {
                         updateUI(user)
                     } else {
 
-                        Log.w("TAG", "signInWithEmail:failure", task.exception)
+                        //Log.w("TAG", "signInWithEmail:failure", task.exception!!.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "User Authentication Failed: " + task.exception!!.message, Toast.LENGTH_SHORT).show();
                         updateUI(null)
                     }
 

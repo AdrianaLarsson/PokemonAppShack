@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_my_side_settings.*
 import se.appshack.android.refactoring.R
 
 
@@ -14,6 +16,7 @@ class MySideSettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_side_settings)
         navigationBar()
+        signOut()
 
 
 
@@ -67,5 +70,18 @@ class MySideSettingsActivity : AppCompatActivity() {
         })
 
 
+    }
+
+
+    fun signOut(){
+
+
+        signOut.setOnClickListener {
+
+
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_my_side_settings.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import se.appshack.android.refactoring.NamedResponseModel
@@ -38,7 +39,16 @@ class MainActivity : AppCompatActivity() {
        val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
         navigationBar()
+        currentUser()
 
+
+
+
+    }
+
+
+
+    fun currentUser(){
 
         val mUser = FirebaseAuth.getInstance().currentUser
         if (mUser != null) {
@@ -55,6 +65,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
         }
+
 
     }
 
@@ -209,6 +220,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
 
 
 
