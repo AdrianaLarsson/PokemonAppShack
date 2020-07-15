@@ -77,10 +77,33 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("TAG", "signInWithEmail:success")
                         val user = auth.currentUser
                         updateUI(user)
+
+                        Toast.makeText(this,"Du loggas nu in",Toast.LENGTH_SHORT).show()
                     } else {
 
                         //Log.w("TAG", "signInWithEmail:failure", task.exception!!.message, Toast.LENGTH_SHORT).show()
-                        Toast.makeText(this, "User Authentication Failed: " + task.exception!!.message, Toast.LENGTH_SHORT).show();
+
+                    var passwordInv= task.exception!!.message
+
+                   if (passwordInv.equals("The password is invalid or the user does not have a password.")){
+
+                       Log.w("Error Auth","Lösenordet är inte korrekt")
+                       passwordLogin.error = "Lösenordet är inte korrekt"
+
+                   }else if (passwordInv.equals("We have blocked all requests from this device due to unusual activity. Try again later. [ Too many unsuccessful login attempts. Please try again later. ]")){
+
+                       Log.w("Error Auth","Vi har blockerat alla förfrågningar från den här enheten på grund av ovanlig aktivitet. Försök igen senare. [För många misslyckade inloggningsförsök. Vänligen försök igen senare. ]")
+
+                   }else if (passwordInv.equals("There is no user record corresponding to this identifier. The user may have been deleted.")){
+
+                       Log.w("Error Auth","Det finns ingen användare med det här namnet")
+                       emailLogin.error = "Det finns ingen användare med det här namnet"
+                   }
+
+
+                        Toast.makeText(this, "User Authentication Failed: " + task.exception!!.localizedMessage, Toast.LENGTH_SHORT).show()
+                       Log.w("Error Auth", task.exception!!.message.toString())
+
                         updateUI(null)
                     }
 
