@@ -31,11 +31,21 @@
         <activity
             android:name=".Activities.MyPokemonListActivity"
             android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
+
+
+        <activity
+            android:name=".Activities.MySideSettingsActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
 
         </activity>
