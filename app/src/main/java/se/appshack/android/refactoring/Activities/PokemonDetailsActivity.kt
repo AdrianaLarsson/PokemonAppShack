@@ -196,7 +196,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
        }
 
-
+//add/post/save to realtime database pokemon
     fun postToRealTimeFirebase(name : String, number : String, types: String, height : String , weight : String , imageFront: String, imageBack : String){
 
         val db = FirebaseDatabase.getInstance()
@@ -215,7 +215,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
         val pushKey = myRef.push().key!!
-        myRef.child(pushKey).setValue(pokemon)
+        myRef.child(name).setValue(pokemon)
 
     }
 

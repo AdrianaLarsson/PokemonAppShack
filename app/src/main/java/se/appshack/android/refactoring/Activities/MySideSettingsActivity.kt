@@ -1,10 +1,12 @@
 package se.appshack.android.refactoring.Activities
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v7.app.AppCompatActivity
+import com.google.firebase.database.FirebaseDatabase
 import se.appshack.android.refactoring.R
+
 
 class MySideSettingsActivity : AppCompatActivity() {
 
@@ -12,6 +14,15 @@ class MySideSettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_side_settings)
         navigationBar()
+
+
+        val db = FirebaseDatabase.getInstance()
+        val myRef = db.getReference("MyPokemonList")
+        myRef.child("pidgey").removeValue()
+
+
+
+
     }
 
 
