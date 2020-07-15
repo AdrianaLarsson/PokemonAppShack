@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_firebase_list.view.*
 import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
@@ -39,6 +40,17 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
         pNumber.text = "# " + pokemons.number
         var imageUrlFront = pokemons.imageFront
        Picasso.with(context).load(imageUrlFront).into(pimgFront)
+
+        var deletePoke = holder.itemView.deletePokemonBtn
+
+        deletePoke.setOnClickListener {
+            val db = FirebaseDatabase.getInstance()
+            val myRef = db.getReference("MyPokemonList")
+            myRef.child(pokemons.name).removeValue()
+
+
+        }
+
 
 
     }

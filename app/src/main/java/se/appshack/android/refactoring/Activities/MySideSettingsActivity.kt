@@ -16,9 +16,6 @@ class MySideSettingsActivity : AppCompatActivity() {
         navigationBar()
 
 
-        val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("MyPokemonList")
-        myRef.child("pidgey").removeValue()
 
 
 
