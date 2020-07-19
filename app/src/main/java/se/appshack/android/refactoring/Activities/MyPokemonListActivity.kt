@@ -31,8 +31,10 @@ class MyPokemonListActivity : AppCompatActivity() {
 
     fun readPokemonListFromFirebase(){
 
+        var intent = Intent()
+        var list = intent.getStringExtra("POKEMONLIST")
         val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("MyPokemonList")
+        val myRef = db.getReference("${list}")
         myRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {

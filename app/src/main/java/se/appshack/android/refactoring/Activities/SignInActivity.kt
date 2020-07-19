@@ -3,6 +3,7 @@ package se.appshack.android.refactoring.Activities
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -60,12 +61,10 @@ class SignInActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val userId = auth!!.currentUser!!.uid
-
-
                         val intent = Intent(this, MainActivity::class.java)
 
                         val db = FirebaseDatabase.getInstance()
-                        val myRef = db!!.getReference("Personals")
+                        val myRef = db!!.getReference("Users")
 
 
                         val team = UserClass(
@@ -76,8 +75,16 @@ class SignInActivity : AppCompatActivity() {
                                 "${userNameSignIn.text}"
 
                         )
+
+                       var g = userNameSignIn.text
+                        Log.w("PUTTTTT", "Pust extra => " + g)
+                        intent.putExtra("UserListPokemon", g)
+
+
+
                         myRef.child(userId).setValue(team)
                         startActivity(intent)
+
                         finish()
                     } else {
 

@@ -28,7 +28,7 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var pokemonlist : MutableList<NamedResponseModel>
+    private lateinit var pokemonlist: MutableList<NamedResponseModel>
     private lateinit var pokemonAdapter: PokemonListAdapter
 
 
@@ -36,19 +36,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       val getPokemonListTask = GetPokemonListTask()
+        val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
         navigationBar()
         currentUser()
 
 
-
-
     }
 
 
-
-    fun currentUser(){
+    fun currentUser() {
 
         val mUser = FirebaseAuth.getInstance().currentUser
         if (mUser != null) {
@@ -61,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                             // ...
                         } else { // Handle error -> task.getException();
 
-                            Log.w("wrong", "wrongwrong" )
+                            Log.w("wrong", "wrongwrong")
                         }
                     }
         }
@@ -70,9 +67,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-   internal inner class GetPokemonListTask : AsyncTask<Void?, Void?, PokemonListResponse?>() {
-         override fun doInBackground(vararg params: Void?): PokemonListResponse? {
+    internal inner class GetPokemonListTask : AsyncTask<Void?, Void?, PokemonListResponse?>() {
+        override fun doInBackground(vararg params: Void?): PokemonListResponse? {
             println("doInBackground")
             val client = OkHttpClient()
             val request = Request.Builder()
@@ -93,7 +89,6 @@ class MainActivity : AppCompatActivity() {
             }
             return response
         }
-
 
 
         override fun onPostExecute(result: PokemonListResponse?) {
@@ -117,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 pokemonModels.add(result?.results?.get(i - 1)!!)
 
             }
-             pokemonAdapter = PokemonListAdapter(this@MainActivity, pokemonModels)
+            pokemonAdapter = PokemonListAdapter(this@MainActivity, pokemonModels)
 
 
             Log.w("pokemonModels", "pokemonModels ____" + pokemonModels.toString())
@@ -135,13 +130,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    fun getSearchString(){
+    fun getSearchString() {
 
 //get the text when the user writes something in editext
         var editTxtS = findViewById<EditText>(R.id.searchEdtxt)
 
-        editTxtS.addTextChangedListener(object : TextWatcher{
+        editTxtS.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
                 filterlist(s.toString())
@@ -159,15 +153,13 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-
-
     }
 
     //filter text
     private fun filterlist(filterItem: String) {
-        var tempList : MutableList<NamedResponseModel> = ArrayList()
-        for (d in pokemonlist){
-            if (filterItem in d.name.toString()){
+        var tempList: MutableList<NamedResponseModel> = ArrayList()
+        for (d in pokemonlist) {
+            if (filterItem in d.name.toString()) {
                 tempList.add(d)
             }
         }
@@ -175,56 +167,50 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun navigationBar() {
 
-        fun navigationBar(){
+        var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        navigationView.selectedItemId = R.id.searchPokemon
 
-            var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-            navigationView.selectedItemId = R.id.searchPokemon
+        navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
 
-            navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.myMyPokemonList -> {
 
-                when (it.itemId) {
-                    R.id.myMyPokemonList -> {
+                    var intent = Intent(this, MyPokemonListActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
-                        var intent = Intent(this, MyPokemonListActivity::class.java)
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                        startActivity(intent)
+                      intent.getStringExtra("UserListPokemon")
 
-                        return@OnNavigationItemSelectedListener true
-                    }
+                   Log.w("Extra", "String extra =>> " + intent.getStringExtra("UserListPokemon"))
+                   // intent.putExtra("POKEMONLIST", list)
+                    startActivity(intent)
 
-
-
-
-
-
+                    return@OnNavigationItemSelectedListener true
                 }
-                when (it.itemId) {
-                    R.id.settings -> {
-
-                        var intent = Intent(this, MySideSettingsActivity::class.java)
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                        startActivity(intent)
-
-                        return@OnNavigationItemSelectedListener true
-                    }
 
 
+            }
+            when (it.itemId) {
+                R.id.settings -> {
 
+
+                    var intent = Intent(this, MySideSettingsActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
+
+                    return@OnNavigationItemSelectedListener true
                 }
-                true
 
+
+            }
+            true
 
 
         })
 
 
     }
-
-
-
-
-
 
 
 }
