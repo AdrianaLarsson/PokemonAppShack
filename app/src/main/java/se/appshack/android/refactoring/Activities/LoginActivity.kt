@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         btnLogin()
 
+        toSignInActivity()
 
     }
 
@@ -136,6 +137,18 @@ class LoginActivity : AppCompatActivity() {
             a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(a);
         }
+    }
+
+
+    fun toSignInActivity(){
+
+        signIn.setOnClickListener {
+
+            startActivity(Intent(this,SignInActivity::class.java))
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+
+        }
+
     }
 
 
