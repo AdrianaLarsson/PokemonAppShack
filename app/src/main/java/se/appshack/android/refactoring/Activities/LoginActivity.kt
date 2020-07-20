@@ -118,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (currentUser != null ){
 
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this,MySideSettingsActivity::class.java))
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             finish()
 

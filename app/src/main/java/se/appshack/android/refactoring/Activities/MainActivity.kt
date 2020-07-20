@@ -36,10 +36,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+
         val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
         navigationBar()
         currentUser()
+
+      //  var intent = getIntent()
+
 
 
     }
@@ -180,7 +186,8 @@ class MainActivity : AppCompatActivity() {
                     var intent = Intent(this, MyPokemonListActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
-                      intent.getStringExtra("UserListPokemon")
+
+
 
                    Log.w("Extra", "String extra =>> " + intent.getStringExtra("UserListPokemon"))
                    // intent.putExtra("POKEMONLIST", list)

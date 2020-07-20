@@ -61,7 +61,7 @@ class SignInActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val userId = auth!!.currentUser!!.uid
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, MySideSettingsActivity::class.java)
 
                         val db = FirebaseDatabase.getInstance()
                         val myRef = db!!.getReference("Users")
@@ -76,9 +76,6 @@ class SignInActivity : AppCompatActivity() {
 
                         )
 
-                       var g = userNameSignIn.text
-                        Log.w("PUTTTTT", "Pust extra => " + g)
-                        intent.putExtra("UserListPokemon", g)
 
 
 
