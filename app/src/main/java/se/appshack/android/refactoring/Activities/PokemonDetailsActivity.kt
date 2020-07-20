@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
@@ -199,8 +200,14 @@ class PokemonDetailsActivity : AppCompatActivity() {
 //add/post/save to realtime database pokemon
     fun postToRealTimeFirebase(name : String, number : String, types: String, height : String , weight : String , imageFront: String, imageBack : String){
 
+
+    val firebaseAuth = FirebaseAuth.getInstance()
+    val firebaseUser = firebaseAuth.currentUser
+    var userNode = firebaseUser!!.uid
+    Log.w("Tag"," UserId : =====>>>> " + userNode)
+
         val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("MyPokemonList")
+        val myRef = db.getReference(userNode)
 
         val pokemon = PokemonFirebaseClass(
                 name,

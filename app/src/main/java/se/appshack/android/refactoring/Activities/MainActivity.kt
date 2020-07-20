@@ -13,6 +13,8 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_my_side_settings.*
 import okhttp3.OkHttpClient
@@ -30,47 +32,33 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var pokemonlist: MutableList<NamedResponseModel>
     private lateinit var pokemonAdapter: PokemonListAdapter
-
-
+    var mAuth: FirebaseAuth? = null
+    private var mDatabaseReference: DatabaseReference? = null
+    private var mDatabase: FirebaseDatabase? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
 
-
-
         val getPokemonListTask = GetPokemonListTask()
         getPokemonListTask.execute()
         navigationBar()
-        currentUser()
+
 
       //  var intent = getIntent()
 
 
+        mAuth = FirebaseAuth.getInstance()
+
+
+
+
+
+
 
     }
 
 
-    fun currentUser() {
-
-        val mUser = FirebaseAuth.getInstance().currentUser
-        if (mUser != null) {
-            mUser.getIdToken(true)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            val idToken = task.result?.token
-
-                            Log.w("IdToken", "Token  === >>> " + idToken)
-                            // ...
-                        } else { // Handle error -> task.getException();
-
-                            Log.w("wrong", "wrongwrong")
-                        }
-                    }
-        }
-
-
-    }
 
 
     internal inner class GetPokemonListTask : AsyncTask<Void?, Void?, PokemonListResponse?>() {

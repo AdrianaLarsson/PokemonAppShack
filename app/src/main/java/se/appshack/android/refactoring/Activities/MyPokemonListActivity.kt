@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,16 +26,22 @@ class MyPokemonListActivity : AppCompatActivity() {
 
         readPokemonListFromFirebase()
         navigationBar()
+
+
+
+
     }
 
 
 
     fun readPokemonListFromFirebase(){
 
-        var intent = Intent()
-        var list = intent.getStringExtra("POKEMONLIST")
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser = firebaseAuth.currentUser
+        var userNode = firebaseUser!!.uid
+        Log.w("Tag"," UserId : =====>>>> " + userNode)
         val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("${list}")
+        val myRef = db.getReference("${userNode}")
         myRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {

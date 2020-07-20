@@ -2,9 +2,11 @@ package se.appshack.android.refactoring.Adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_firebase_list.view.*
@@ -43,9 +45,15 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
         var deletePoke = holder.itemView.deletePokemonBtn
 
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser = firebaseAuth.currentUser
+        var userNode = firebaseUser!!.uid
+        Log.w("Tag"," UserId : =====>>>> " + userNode)
+
+
         deletePoke.setOnClickListener {
             val db = FirebaseDatabase.getInstance()
-            val myRef = db.getReference("MyPokemonList")
+            val myRef = db.getReference(userNode)
             myRef.child(pokemons.name).removeValue()
 
 

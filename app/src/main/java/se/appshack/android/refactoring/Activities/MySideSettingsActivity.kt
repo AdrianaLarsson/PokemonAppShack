@@ -27,6 +27,12 @@ class MySideSettingsActivity : AppCompatActivity() {
 showUserInfo()
 
 
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser = firebaseAuth.currentUser
+        var userNode = firebaseUser!!.uid
+        Log.w("Tag"," UserId : =====>>>> " + userNode)
+
+
     }
 
 
