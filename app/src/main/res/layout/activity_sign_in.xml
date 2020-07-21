@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backpokoem"
     tools:context=".Activities.SignInActivity">
 
     <TextView
+        android:background="@android:color/white"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:background="@android:color/white"
         android:id="@+id/userNameSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lastNameSign" />
 
     <EditText
+        android:background="@android:color/white"
         android:id="@+id/emailSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/userNameSignIn" />
 
     <EditText
+        android:background="@android:color/white"
         android:id="@+id/passwordSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,6 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordSign" />
 
     <EditText
+        android:background="@android:color/white"
         android:id="@+id/lastNameSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,6 +118,8 @@
         app:layout_constraintTop_toBottomOf="@+id/firstNameSign" />
 
     <EditText
+
+        android:background="@android:color/white"
         android:id="@+id/firstNameSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -130,6 +138,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
+
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
