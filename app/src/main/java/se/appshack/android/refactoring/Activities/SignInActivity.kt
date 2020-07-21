@@ -26,6 +26,8 @@ class SignInActivity : AppCompatActivity() {
 
 
         }
+
+        toLogin()
     }
 
 
@@ -87,6 +89,18 @@ class SignInActivity : AppCompatActivity() {
 
                     }
                 }
+    }
+
+
+    fun toLogin(){
+
+
+        loginAct.setOnClickListener {
+
+            var intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 
 
