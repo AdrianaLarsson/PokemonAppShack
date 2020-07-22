@@ -1,11 +1,14 @@
 package se.appshack.android.refactoring.Adapters
 
+import android.app.Dialog
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
@@ -52,9 +55,38 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
 
         deletePoke.setOnClickListener {
-            val db = FirebaseDatabase.getInstance()
-            val myRef = db.getReference(userNode)
-            myRef.child(pokemons.name).removeValue()
+
+            var dialog: Dialog
+
+            dialog = Dialog(context)
+
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.popup_delete_layout)
+
+            dialog.show()
+
+
+            //deletes pokemon after asking (in popup) if the user wants delete pokemn in her list
+            var btnDeleteYesBtn : Button? = dialog.findViewById(R.id.deleteBtnPopUp)
+            btnDeleteYesBtn?.setOnClickListener {
+                val db = FirebaseDatabase.getInstance()
+                val myRef = db.getReference(userNode)
+                myRef.child(pokemons.name).removeValue()
+                dialog.dismiss()
+            }
+
+
+
+            //cancel btn in pop up
+            var btnCancelPopup: Button? = dialog?.findViewById(R.id.noBtnPopUp)
+            btnCancelPopup?.isEnabled = true
+            btnCancelPopup?.setOnClickListener {
+
+                dialog?.cancel()
+
+            }
+
+
 
 
         }
