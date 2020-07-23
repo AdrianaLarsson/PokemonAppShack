@@ -2,6 +2,7 @@ package se.appshack.android.refactoring.Adapters
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_firebase_list.view.*
+import se.appshack.android.refactoring.Activities.GameActivity
+import se.appshack.android.refactoring.Activities.PokemonDetailsActivity
 import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
 import se.appshack.android.refactoring.NamedResponseModel
 import se.appshack.android.refactoring.R
@@ -46,6 +49,16 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
     override fun onBindViewHolder(holder: PokemonFirebaseViewHolder, position: Int) {
 
+
+      holder.itemView.setOnClickListener {
+
+          val intent = Intent()
+          intent.setClass(context, GameActivity::class.java)
+
+          context.startActivity(intent)
+
+      }
+
         var pokemons = pokeFire[position]
 
         var pName = holder.itemView.namePokemon
@@ -62,6 +75,11 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
         val firebaseUser = firebaseAuth.currentUser
         var userNode = firebaseUser!!.uid
         Log.w("Tag"," UserId : =====>>>> " + userNode)
+
+
+
+
+
 
 
         deletePoke.setOnClickListener {
@@ -110,10 +128,13 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
 
 
+
+
     }
 
 
     class PokemonFirebaseViewHolder(itemPokemon : View) : RecyclerView.ViewHolder(itemPokemon){
+
 
 
     }

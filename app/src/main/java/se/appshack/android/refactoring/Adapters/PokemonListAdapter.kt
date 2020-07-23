@@ -19,8 +19,13 @@ class PokemonListAdapter(private val activity: Activity,  private var data: List
     }
 
     override fun onBindViewHolder(pokemonViewHolder: PokemonViewHolder, i: Int) {
+
+
         val responseModel = data[i]
         pokemonViewHolder.bind(responseModel)
+
+
+
 
         pokemonViewHolder.setOnClickListener(View.OnClickListener {
             val intent = Intent()
