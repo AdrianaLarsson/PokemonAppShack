@@ -51,6 +51,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFD83B"
+        android:ems="10"
+        android:hint="Sök"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/mylistrecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomNavigationMyList"
         android:layout_width="match_parent"

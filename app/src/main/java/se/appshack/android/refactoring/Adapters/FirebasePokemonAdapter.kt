@@ -43,7 +43,7 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
         var pName = holder.itemView.namePokemon
         var pNumber = holder.itemView.numberPokemon
         var pimgFront = holder.itemView.imgPokemonFront
-        pName.text = pokemons.name
+        pName.text = pokemons.name!!.substring(0, 1).toUpperCase() + pokemons.name!!.substring(1)
         pNumber.text = "# " + pokemons.number
         var imageUrlFront = pokemons.imageFront
        Picasso.with(context).load(imageUrlFront).into(pimgFront)
@@ -71,7 +71,7 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
             Picasso.with(context).load(imageUrlFront).into(imgPokePop)
 
             var txtVNamePoke : TextView = dialog.findViewById(R.id.namePokemonDel)
-            txtVNamePoke.text = pokemons.name
+            txtVNamePoke.text = pokemons.name!!.substring(0, 1).toUpperCase() + pokemons.name!!.substring(1)
 
 
             //deletes pokemon after asking (in popup) if the user wants delete pokemn in her list
