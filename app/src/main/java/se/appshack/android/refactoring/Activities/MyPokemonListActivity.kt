@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,10 +18,15 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_my_pokemon_list.*
 import se.appshack.android.refactoring.Adapters.FirebasePokemonAdapter
+import se.appshack.android.refactoring.Adapters.PokemonListAdapter
 import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
+import se.appshack.android.refactoring.NamedResponseModel
 import se.appshack.android.refactoring.R
 
 class MyPokemonListActivity : AppCompatActivity() {
+
+    private lateinit var listPokemon: MutableList<PokemonFirebaseClass>
+    private lateinit var pokemonFirebaseAdapter: FirebasePokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +34,14 @@ class MyPokemonListActivity : AppCompatActivity() {
 
         readPokemonListFromFirebase()
         navigationBar()
-
+getSearchString()
 
 
 
     }
+
+
+
 
 
 
@@ -74,9 +85,13 @@ class MyPokemonListActivity : AppCompatActivity() {
                 val layoutManager = LinearLayoutManager(this@MyPokemonListActivity)
                layoutManager.orientation = LinearLayoutManager.VERTICAL
                 recyView.layoutManager = layoutManager
-                val adapter = FirebasePokemonAdapter(this@MyPokemonListActivity, pokemonList)
-                recyView.adapter = adapter
+                pokemonFirebaseAdapter = FirebasePokemonAdapter(this@MyPokemonListActivity, pokemonList)
+                recyView.adapter = pokemonFirebaseAdapter
 
+
+
+
+                listPokemon = pokemonList
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -89,6 +104,46 @@ class MyPokemonListActivity : AppCompatActivity() {
 
 
     }
+
+
+
+    fun getSearchString() {
+
+       //get the text when the user writes something in editext
+        var editTxtS = findViewById<EditText>(R.id.searchMylist)
+
+        editTxtS.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+
+                filterlist(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+
+        })
+
+
+    }
+
+
+    //filter text
+    private fun filterlist(filterItem: String) {
+        var tempList: MutableList<PokemonFirebaseClass> = ArrayList()
+        for (d in listPokemon) {
+            if (filterItem in d.name.toString()) {
+                tempList.add(d)
+            }
+        }
+        pokemonFirebaseAdapter.updateList(tempList)
+    }
+
 
 
 

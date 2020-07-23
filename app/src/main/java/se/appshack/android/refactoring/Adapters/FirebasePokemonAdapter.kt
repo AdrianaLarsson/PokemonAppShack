@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_firebase_list.view.*
 import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
+import se.appshack.android.refactoring.NamedResponseModel
 import se.appshack.android.refactoring.R
 
 
@@ -35,6 +36,13 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
     override fun getItemCount(): Int {
         return pokeFire.size
     }
+
+
+    fun updateList(list: MutableList<PokemonFirebaseClass>){
+        pokeFire = list
+        notifyDataSetChanged()
+    }
+
 
     override fun onBindViewHolder(holder: PokemonFirebaseViewHolder, position: Int) {
 
