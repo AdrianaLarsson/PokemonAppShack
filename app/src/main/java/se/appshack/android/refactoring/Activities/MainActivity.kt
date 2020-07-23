@@ -46,15 +46,7 @@ class MainActivity : AppCompatActivity() {
 
 
       //  var intent = getIntent()
-
-
         mAuth = FirebaseAuth.getInstance()
-
-
-
-
-
-
 
     }
 
@@ -159,6 +151,8 @@ class MainActivity : AppCompatActivity() {
         }
         pokemonAdapter.updateList(tempList)
     }
+
+
 
 
     fun navigationBar() {

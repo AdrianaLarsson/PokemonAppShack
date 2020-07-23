@@ -36,11 +36,8 @@ class PokemonListAdapter(private val activity: Activity,  private var data: List
     }
 
     fun updateList(list: MutableList<NamedResponseModel>){
-
         data = list
         notifyDataSetChanged()
-
-
     }
 
 }

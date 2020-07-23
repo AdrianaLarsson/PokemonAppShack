@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
@@ -65,9 +67,16 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
             dialog.show()
 
+            var imgPokePop : ImageView = dialog.findViewById(R.id.imgVPopupDel)
+            Picasso.with(context).load(imageUrlFront).into(imgPokePop)
+
+            var txtVNamePoke : TextView = dialog.findViewById(R.id.namePokemonDel)
+            txtVNamePoke.text = pokemons.name
+
 
             //deletes pokemon after asking (in popup) if the user wants delete pokemn in her list
             var btnDeleteYesBtn : Button? = dialog.findViewById(R.id.deleteBtnPopUp)
+
             btnDeleteYesBtn?.setOnClickListener {
                 val db = FirebaseDatabase.getInstance()
                 val myRef = db.getReference(userNode)
