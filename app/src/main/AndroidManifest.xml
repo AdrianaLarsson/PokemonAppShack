@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activities.GameActivity">
+        <activity android:name=".Activities.GameActivity"
+            android:screenOrientation="landscape">
 
         </activity>
         <activity android:name=".Activities.SignInActivity" />

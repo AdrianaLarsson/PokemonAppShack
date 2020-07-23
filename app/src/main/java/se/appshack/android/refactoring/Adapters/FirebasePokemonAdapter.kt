@@ -50,14 +50,6 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
     override fun onBindViewHolder(holder: PokemonFirebaseViewHolder, position: Int) {
 
 
-      holder.itemView.setOnClickListener {
-
-          val intent = Intent()
-          intent.setClass(context, GameActivity::class.java)
-
-          context.startActivity(intent)
-
-      }
 
         var pokemons = pokeFire[position]
 
@@ -79,6 +71,15 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
 
 
+        holder.itemView.setOnClickListener {
+
+            val intent = Intent()
+            intent.setClass(context, GameActivity::class.java)
+
+            intent.putExtra("POKEMON_URL", pokemons.imageFront)
+            context.startActivity(intent)
+
+        }
 
 
 
