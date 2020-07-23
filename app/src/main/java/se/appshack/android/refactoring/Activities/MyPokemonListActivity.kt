@@ -41,10 +41,6 @@ getSearchString()
     }
 
 
-
-
-
-
     fun readPokemonListFromFirebase(){
 
         val firebaseAuth = FirebaseAuth.getInstance()

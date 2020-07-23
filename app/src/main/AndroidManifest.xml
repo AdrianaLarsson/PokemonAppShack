@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activities.SignInActivity"></activity>
+        <activity android:name=".Activities.GameActivity"></activity>
+        <activity android:name=".Activities.SignInActivity" />
         <activity
             android:name=".Activities.LoginActivity"
             android:label="@string/title_activity_login">
@@ -33,11 +34,11 @@
             android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activities.MySideSettingsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".Activities.PokemonDetailsActivity"
             android:label="@string/title_activity_pokemon_details"
