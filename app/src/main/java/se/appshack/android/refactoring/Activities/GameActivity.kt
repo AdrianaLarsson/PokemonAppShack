@@ -1,24 +1,41 @@
 package se.appshack.android.refactoring.Activities
 
-import android.R.attr.x
-import android.R.attr.y
-import android.animation.ValueAnimator
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.Point
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
-import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.animation.LinearInterpolator
-import android.widget.ImageView
-import com.squareup.picasso.Picasso
-import se.appshack.android.refactoring.R
+import se.appshack.android.refactoring.ModelClasses.GameView
 
 
 class GameActivity : AppCompatActivity() {
+
+    private var gameView: GameView? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        val point = Point()
+        windowManager.defaultDisplay.getSize(point)
+        gameView = GameView(this, point.x, point.y)
+        setContentView(gameView)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        gameView!!.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        gameView!!.resume()
+    }
+}
+
+/*
+class GameActivity : AppCompatActivity() {
+
+    private var gameView: GameView? = null
     var flight1: Bitmap? = null
     var flight2: Bitmap? = null
     var shoot1: Bitmap? = null
@@ -26,6 +43,8 @@ class GameActivity : AppCompatActivity() {
     var shoot3: Bitmap? = null
     var shoot4: Bitmap? = null
     var shoot5: Bitmap? = null
+    private var bullets: List<BulletClass>? = null
+   var  wingCounter = 0
     var dead: Bitmap? = null
     lateinit var shootOne: Bitmap
     var toShoot = 0
@@ -38,17 +57,27 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(se.appshack.android.refactoring.R.layout.game_layout)
-        moveBackground()
-        pokemonPlay()
+        setContentView(gameView)
 
 
+        val point = Point()
+        gameView = GameView(this, point.x, point.y)
+
+        getWindowManager().getDefaultDisplay().getSize(point);
         mainLayout = findViewById(R.id.constraint);
         image = findViewById(R.id.pokeomonPlay);
 
         image.setOnTouchListener(onTouchListener());
     }
+    override fun onPause() {
+        super.onPause()
+        gameView!!.pause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        gameView!!.resume()
+    }
 
     fun moveBackground() {
 
@@ -152,28 +181,6 @@ class GameActivity : AppCompatActivity() {
     }
 
 
-    fun getFlight(): Bitmap? {
-        if (toShoot != 0) {
-            if (shootCounter == 1) {
-                shootCounter++
-                return shoot1
-            }
-            if (shootCounter == 2) {
-                shootCounter++
-                return shoot2
-            }
-            if (shootCounter == 3) {
-                shootCounter++
-                return shoot3
-            }
-            if (shootCounter == 4) {
-                shootCounter++
-                return shoot4
-            }
-        }
-
-        return shoot1
-    }
-
 
 }
+*/
