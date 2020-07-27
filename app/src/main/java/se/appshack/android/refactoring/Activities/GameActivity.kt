@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.game_layout.*
 import se.appshack.android.refactoring.R
 
 
@@ -40,9 +41,9 @@ class GameActivity : AppCompatActivity() {
         image.setOnTouchListener(onTouchListener());
 
         moveBackground()
-        pokemonPlay()
 
-  
+information()
+
     }
 
 
@@ -69,25 +70,7 @@ class GameActivity : AppCompatActivity() {
     }
 
 
-    fun pokemonPlay() {
 
-        val bullets: ImageView = findViewById(se.appshack.android.refactoring.R.id.bullet) as ImageView
-
-        val animator = ValueAnimator.ofFloat(0.0f, 80.0f)
-        animator.repeatCount = ValueAnimator.INFINITE
-        animator.interpolator = LinearInterpolator()
-        animator.duration = 10000L
-
-        animator.addUpdateListener { animation ->
-            val progress = animation.animatedValue as Float
-            val width: Int = bullets.getWidth()
-            val translationX = width * progress
-            bullets.setTranslationX(translationX)
-            bullets.setTranslationX(translationX - width)
-        }
-        animator.start()
-
-    }
 
     private fun onTouchListener(): View.OnTouchListener? {
 
@@ -131,7 +114,26 @@ class GameActivity : AppCompatActivity() {
 
 
 
+fun information(){
 
+
+
+
+    val pokemonH = intent.extras.getString("POKEMON_HEIGHT")
+    val pokemonW = intent.extras.getString("POKEMON_WEIGHT")
+    val pokemonNu = intent.extras.getString("POKEMON_NUMBER")
+    val pokemonNa = intent.extras.getString("POKEMON_NAME")
+
+
+    pokemonHeight.text = pokemonH
+    pokemonWeight.text = pokemonW
+    pokemonNumber.text = pokemonNu
+    pokemonName.text = pokemonNa
+
+
+
+
+}
 
 
 

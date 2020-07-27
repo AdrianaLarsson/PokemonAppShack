@@ -76,6 +76,10 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
             val intent = Intent()
             intent.setClass(context, GameActivity::class.java)
 
+            intent.putExtra("POKEMON_NUMBER", pokemons.number)
+            intent.putExtra("POKEMON_TYPES", pokemons.types)
+            intent.putExtra("POKEMON_WEIGHT", pokemons.weight)
+            intent.putExtra("POKEMON_HEIGHT", pokemons.height)
             intent.putExtra("POKEMON_URL", pokemons.imageFront)
             context.startActivity(intent)
 

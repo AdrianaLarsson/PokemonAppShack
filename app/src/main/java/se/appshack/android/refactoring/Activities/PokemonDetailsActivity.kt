@@ -46,7 +46,6 @@ class PokemonDetailsActivity : AppCompatActivity() {
         btnbackMainAct()
         imageAni()
 
-        moveBackGround()
 
     }
     internal inner class GetPokemonDetailsTask : AsyncTask<String?, Void?, PokemonDetailsResponse?>() {
@@ -234,30 +233,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
 
-    fun moveBackGround(){
 
-
-
-
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        val backgroundOne: RelativeLayout = findViewById(se.appshack.android.refactoring.R.id.backgroundone) as RelativeLayout
-        val backgroundTwo: LinearLayout = findViewById(se.appshack.android.refactoring.R.id.backgroundtwo) as LinearLayout
-
-        val animator = ValueAnimator.ofFloat(1.0f, 0.0f)
-        animator.repeatCount = ValueAnimator.INFINITE
-        animator.interpolator = LinearInterpolator()
-        animator.duration = 10000L
-        animator.addUpdateListener { animation ->
-            val progress = animation.animatedValue as Float
-            val width: Int = backgroundOne.getWidth()
-            val translationX = width * progress
-            backgroundOne.setTranslationX(translationX - width)
-            backgroundOne.setTranslationX(translationX)
-
-
-        }
-        animator.start()
-    }
 
 
 
