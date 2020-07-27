@@ -19,9 +19,10 @@
         android:id="@+id/background_two"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="1dp"
         android:background="@drawable/backgroundpokemon"
-        tools:layout_editor_absoluteX="-181dp"
-        tools:layout_editor_absoluteY="-144dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-181dp" />
 
     <ImageView
         android:id="@+id/pokeomonPlay"
@@ -52,6 +53,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.189"
         app:srcCompat="@drawable/bulletone" />
+
+    <ImageView
+        android:id="@+id/monsterOne"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/monsterThree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/monsterTwo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/monsters" />
+
+    <ImageView
+        android:id="@+id/monsterTwo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="600dp"
+        android:layout_marginRight="600dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/background_one"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/monsters" />
+
+    <ImageView
+        android:id="@+id/monsterThree"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="500dp"
+        android:layout_marginLeft="500dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/background_two"
+        app:srcCompat="@drawable/monsters" />
 
 
 </android.support.constraint.ConstraintLayout>

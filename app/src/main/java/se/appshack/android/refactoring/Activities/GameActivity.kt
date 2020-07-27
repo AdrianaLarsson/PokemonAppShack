@@ -1,54 +1,24 @@
 package se.appshack.android.refactoring.Activities
 
+import android.animation.ValueAnimator
 import android.graphics.Point
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
-import se.appshack.android.refactoring.ModelClasses.GameView
+import android.view.animation.LinearInterpolator
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
+import se.appshack.android.refactoring.R
 
 
 class GameActivity : AppCompatActivity() {
 
-    private var gameView: GameView? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        val point = Point()
-        windowManager.defaultDisplay.getSize(point)
-        gameView = GameView(this, point.x, point.y)
-        setContentView(gameView)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        gameView!!.pause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        gameView!!.resume()
-    }
-}
-
-/*
-class GameActivity : AppCompatActivity() {
-
-    private var gameView: GameView? = null
-    var flight1: Bitmap? = null
-    var flight2: Bitmap? = null
-    var shoot1: Bitmap? = null
-    var shoot2: Bitmap? = null
-    var shoot3: Bitmap? = null
-    var shoot4: Bitmap? = null
-    var shoot5: Bitmap? = null
-    private var bullets: List<BulletClass>? = null
-   var  wingCounter = 0
-    var dead: Bitmap? = null
-    lateinit var shootOne: Bitmap
-    var toShoot = 0
-    var shootCounter = 1
     private var mainLayout: ViewGroup? = null
     private lateinit var image: ImageView
 
@@ -57,27 +27,24 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(gameView)
+        setContentView(R.layout.game_layout)
 
 
         val point = Point()
-        gameView = GameView(this, point.x, point.y)
+
 
         getWindowManager().getDefaultDisplay().getSize(point);
         mainLayout = findViewById(R.id.constraint);
         image = findViewById(R.id.pokeomonPlay);
 
         image.setOnTouchListener(onTouchListener());
-    }
-    override fun onPause() {
-        super.onPause()
-        gameView!!.pause()
+
+        moveBackground()
+        pokemonPlay()
+
+  
     }
 
-    override fun onResume() {
-        super.onResume()
-        gameView!!.resume()
-    }
 
     fun moveBackground() {
 
@@ -106,7 +73,7 @@ class GameActivity : AppCompatActivity() {
 
         val bullets: ImageView = findViewById(se.appshack.android.refactoring.R.id.bullet) as ImageView
 
-        val animator = ValueAnimator.ofFloat(0.0f, 1.0f)
+        val animator = ValueAnimator.ofFloat(0.0f, 80.0f)
         animator.repeatCount = ValueAnimator.INFINITE
         animator.interpolator = LinearInterpolator()
         animator.duration = 10000L
@@ -122,13 +89,13 @@ class GameActivity : AppCompatActivity() {
 
     }
 
-    private fun onTouchListener(): OnTouchListener? {
+    private fun onTouchListener(): View.OnTouchListener? {
 
         val pokemonUrl = intent.extras.getString("POKEMON_URL")
         var imgPlayPoke: ImageView = findViewById(se.appshack.android.refactoring.R.id.pokeomonPlay)
         Picasso.with(this).load(pokemonUrl).into(imgPlayPoke)
 
-        return OnTouchListener { view, event ->
+        return View.OnTouchListener() { view, event ->
             val x = event.rawX.toInt()
             val y = event.rawY.toInt()
             when (event.action and MotionEvent.ACTION_MASK) {
@@ -150,7 +117,7 @@ class GameActivity : AppCompatActivity() {
                     view.layoutParams = layoutParams
 
 
-                    toShoot
+
 
                 }
             }
@@ -162,25 +129,12 @@ class GameActivity : AppCompatActivity() {
     }
 
 
-    fun shoot() {
 
 
-        shootOne = BitmapFactory.decodeResource(resources, R.drawable.bulletone)
-        var shootTwo = BitmapFactory.decodeResource(resources, R.drawable.bulletone)
-        var shootThree = BitmapFactory.decodeResource(resources, R.drawable.bulletone)
-        var shootFour = BitmapFactory.decodeResource(resources, R.drawable.bulletone)
-        var shootFive = BitmapFactory.decodeResource(resources, R.drawable.bulletone)
 
-        shootOne = Bitmap.createScaledBitmap(shootOne, 5, 5, false)
-        shootTwo = Bitmap.createScaledBitmap(shootOne, 5, 5, false)
-        shootThree = Bitmap.createScaledBitmap(shootOne, 5, 5, false)
-        shootFour = Bitmap.createScaledBitmap(shootOne, 5, 5, false)
-        shootFive = Bitmap.createScaledBitmap(shootOne, 5, 5, false)
-
-
-    }
 
 
 
 }
-*/
+
+

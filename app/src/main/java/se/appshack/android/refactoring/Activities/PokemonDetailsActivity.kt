@@ -1,13 +1,18 @@
 package se.appshack.android.refactoring.Activities
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -40,6 +45,8 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
         btnbackMainAct()
         imageAni()
+
+        moveBackGround()
 
     }
     internal inner class GetPokemonDetailsTask : AsyncTask<String?, Void?, PokemonDetailsResponse?>() {
@@ -224,6 +231,32 @@ class PokemonDetailsActivity : AppCompatActivity() {
         val pushKey = myRef.push().key!!
         myRef.child(name).setValue(pokemon)
 
+    }
+
+
+    fun moveBackGround(){
+
+
+
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        val backgroundOne: RelativeLayout = findViewById(se.appshack.android.refactoring.R.id.backgroundone) as RelativeLayout
+        val backgroundTwo: LinearLayout = findViewById(se.appshack.android.refactoring.R.id.backgroundtwo) as LinearLayout
+
+        val animator = ValueAnimator.ofFloat(1.0f, 0.0f)
+        animator.repeatCount = ValueAnimator.INFINITE
+        animator.interpolator = LinearInterpolator()
+        animator.duration = 10000L
+        animator.addUpdateListener { animation ->
+            val progress = animation.animatedValue as Float
+            val width: Int = backgroundOne.getWidth()
+            val translationX = width * progress
+            backgroundOne.setTranslationX(translationX - width)
+            backgroundOne.setTranslationX(translationX)
+
+
+        }
+        animator.start()
     }
 
 
