@@ -128,7 +128,7 @@ fun information(){
     pokemonHeight.text = pokemonH
     pokemonWeight.text = pokemonW
     pokemonNumber.text = pokemonNu
-    pokemonName.text = pokemonNa
+    pokemonName.text =  "# " + pokemonNa
 
 
 
