@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_sign_in.*
+import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
 import se.appshack.android.refactoring.ModelClasses.UserClass
+import se.appshack.android.refactoring.ModelClasses.UserNameClass
 import se.appshack.android.refactoring.R
 
 class SignInActivity : AppCompatActivity() {
@@ -85,6 +88,8 @@ class SignInActivity : AppCompatActivity() {
                         startActivity(intent)
 
                         finish()
+
+                        addUser()
                     } else {
 
                     }
@@ -104,5 +109,31 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
+    fun addUser(){
+
+
+
+
+        val db = FirebaseDatabase.getInstance()
+        val myRef = db.getReference("Usernames")
+
+        val pokemon = UserNameClass(
+
+                "${userNameSignIn.text}"
+
+        )
+
+
+        val pushKey = myRef.push().key!!
+        myRef.child(pushKey).setValue(pokemon)
+
+    }
+
+
+
+
 
 }
+
+
+
