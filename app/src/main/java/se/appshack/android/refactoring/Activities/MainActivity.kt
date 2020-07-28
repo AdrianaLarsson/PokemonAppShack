@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
     fun navigationBar() {
 
-        var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationAllUser)
         navigationView.selectedItemId = R.id.searchPokemon
 
         navigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener {
@@ -188,6 +188,22 @@ class MainActivity : AppCompatActivity() {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     startActivity(intent)
 
+                    return@OnNavigationItemSelectedListener true
+                }
+
+
+            }
+
+
+
+
+
+            when (it.itemId) {
+                R.id.userlist -> {
+
+                    var intent = Intent(this, AllUsersActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    startActivity(intent)
                     return@OnNavigationItemSelectedListener true
                 }
 
