@@ -15,10 +15,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activities.AllUsersActivity"></activity>
+        <activity android:name=".Activities.ChattActivity"></activity>
+        <activity android:name=".Activities.AllUsersActivity" />
         <activity
             android:name=".Activities.GameActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity android:name=".Activities.SignInActivity" />
         <activity
             android:name=".Activities.LoginActivity"

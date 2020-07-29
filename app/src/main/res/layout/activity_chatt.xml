@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/backgroundpokemon"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ChattActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="406dp"
+        android:layout_height="674dp"
+        android:clipToPadding="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:context=".ChattActivity"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ScrollView
+            android:layout_width="400dp"
+            android:layout_height="518dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/messages_recy"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="10dp"
+                    android:background="@color/colorAccent"
+                    app:layout_constraintBottom_toTopOf="@+id/bottomNavigationAllUser"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchUserNames" />
+            </LinearLayout>
+        </ScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/messageUser"
+                android:layout_width="279dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:ems="10"
+                android:hint="Skicka ett meddelande"
+                android:inputType="text"
+
+                android:paddingHorizontal="10dp"
+                android:paddingRight="20dp"
+                android:shadowColor="#313131"
+                android:textColor="#000000"
+                android:textColorHighlight="#0FA732"
+                android:textColorHint="#4A0FA732"
+                android:textColorLink="@color/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/sendMessageButton"
+                android:layout_width="159dp"
+                android:layout_height="47dp"
+                android:layout_weight="2"
+                android:background="#FFFFFF"
+                android:paddingRight="20dp"
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_menu_send" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="418dp"
+        android:layout_height="61dp"
+        android:orientation="vertical"
+
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/chattPersonals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="100"
+            android:padding="10dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

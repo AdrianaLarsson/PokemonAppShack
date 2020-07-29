@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pokemon_firebase_list.view.*
+import se.appshack.android.refactoring.Activities.ChattActivity
 import se.appshack.android.refactoring.Activities.GameActivity
 import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
 import se.appshack.android.refactoring.ModelClasses.UserNameClass
@@ -50,6 +51,18 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
        var userName = p0.itemView.findViewById<TextView>(R.id.userName)
 
          userName.text =  userNameClass[p1].userName
+
+
+        p0.itemView.setOnClickListener {
+
+            val intent = Intent()
+            intent.setClass(context, ChattActivity::class.java)
+            intent.putExtra("USER_NAME", userNameClass[p1].userName)
+            context.startActivity(intent)
+
+        }
+
+
 
     }
 
