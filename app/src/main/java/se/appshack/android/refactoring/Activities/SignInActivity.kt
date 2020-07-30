@@ -16,6 +16,7 @@ import se.appshack.android.refactoring.R
 
 class SignInActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
+    lateinit var userId : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -65,7 +66,8 @@ class SignInActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
 
-                        val userId = auth!!.currentUser!!.uid
+                         userId = auth!!.currentUser!!.uid
+                        Log.w("USERUID", "User Uid " + userId)
                         val intent = Intent(this, MySideSettingsActivity::class.java)
 
                         val db = FirebaseDatabase.getInstance()
@@ -78,6 +80,8 @@ class SignInActivity : AppCompatActivity() {
                                 "${lastNameSign.text}",
                                 "${emailSign.text}",
                                 "${userNameSignIn.text}"
+
+
 
                         )
 
@@ -119,13 +123,12 @@ class SignInActivity : AppCompatActivity() {
 
         val pokemon = UserNameClass(
 
-                "${userNameSignIn.text}"
+                "${userNameSignIn.text}",
+                userId
 
         )
-
-
         val pushKey = myRef.push().key!!
-        myRef.child(pushKey).setValue(pokemon)
+        myRef.child(userId).setValue(pokemon)
 
     }
 

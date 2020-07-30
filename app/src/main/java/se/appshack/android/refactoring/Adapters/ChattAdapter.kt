@@ -26,12 +26,15 @@ class ChattAdapter(val context: Context, val chattList: List<ChattClass>): Recyc
         if (viewType == MESSAGE_TYPE_LEFT){
             val view = LayoutInflater.from(context).inflate(R.layout.my_message_right, parent, false)
             return MyViewHolder(view)
-        }else {
+        }else if(viewType == MESSAGE_TYPE_RIGHT ) {
             val view = LayoutInflater.from(context).inflate(R.layout.their_message_left, parent, false)
             return MyViewHolder(view)
 
-
+        } else {
+            val view = LayoutInflater.from(context).inflate(R.layout.others_message, parent, false)
+            return MyViewHolder(view)
         }
+
 
     }
 
@@ -79,8 +82,7 @@ class ChattAdapter(val context: Context, val chattList: List<ChattClass>): Recyc
     }
 
     override fun getItemViewType(position: Int): Int {
-        firebaseUser = FirebaseAuth
-                .getInstance().currentUser
+        firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (chattList.get(position).sender.equals(firebaseUser?.uid)){
 
@@ -97,6 +99,9 @@ class ChattAdapter(val context: Context, val chattList: List<ChattClass>): Recyc
 
 
     }
+
+
+
 
 
 }

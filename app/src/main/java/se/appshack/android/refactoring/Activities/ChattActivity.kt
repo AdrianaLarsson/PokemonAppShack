@@ -12,34 +12,99 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_chatt.*
+import kotlinx.android.synthetic.main.activity_my_side_settings.*
 import se.appshack.android.refactoring.Adapters.ChattAdapter
 import se.appshack.android.refactoring.ModelClasses.ChattClass
+import se.appshack.android.refactoring.ModelClasses.PokemonFirebaseClass
+import se.appshack.android.refactoring.ModelClasses.UserNameClass
 import se.appshack.android.refactoring.R
 
 class ChattActivity : AppCompatActivity() {
     var  globalMessageList : List<ChattClass>? =null
+lateinit var auth: FirebaseAuth
+    var name : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatt)
 
-        chatt()
+        auth = FirebaseAuth.getInstance()
+        showUserInfo()
         sendMessage()
 
         retriveMessage()
 
     }
 
-    fun chatt() {
+
+    fun showUserInfo(){
+
+        val userId = intent.extras.getString("USER_ID")
+
+        val firebaseAuth = FirebaseAuth.getInstance()
 
 
-        val chattUserName = intent.extras.getString("USER_NAME")
 
-        userNameChatt.text = chattUserName
+        val db = FirebaseDatabase.getInstance()
+        val myRef = db.getReference("Usernames")
+        val userRef = myRef.child(userId)
+
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                userNameChatt.text = dataSnapshot.child("userName").value as String
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("ERROR", "Failed to read value.", error.toException())
+            }
+
+
+        })
     }
 
 
+
+
+    fun currentUserInfo() {
+
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser = firebaseAuth.currentUser
+        var userNode = firebaseUser!!.uid
+
+
+
+
+        val db = FirebaseDatabase.getInstance()
+        val myRef = db.getReference("Users")
+        val userRef = myRef.child(auth.currentUser!!.uid)
+
+        userRef.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                Log.w("ERROR", "Failed to read value.")
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+               name = dataSnapshot.child("userName").value as String
+
+            }
+
+
+        })
+    }
+
     fun sendMessage() {
+
+
+        val userId = intent.extras.getString("USER_ID")
+
+        val chattUserName = intent.extras.getString("USER_NAME")
+
+
+      //  userNameChatt.text = chattUserName
         var messagefromUser : EditText?
         var messageBtnSend : ImageButton?
         messageBtnSend = findViewById(R.id.sendMessageButton)
@@ -51,8 +116,8 @@ class ChattActivity : AppCompatActivity() {
         val db = FirebaseDatabase.getInstance()
 
 
-        val myRef = db.getReference("Chatt")
-
+        val myRef = db.getReference("${"Chatt => " + userId + chattUserName}")
+        currentUserInfo()
 
         messageBtnSend?.setOnClickListener {
             Log.w("Sending", "Message send")
@@ -60,10 +125,13 @@ class ChattActivity : AppCompatActivity() {
 
                     "${firebaseUser}",
                     "${messagefromUser.text}",
-                    "${"Du"}",
-                    "${"Jag"}"
+                    "${userId}",
+                    "${name}"
+
+
 
             )
+
 
             val pushKey = myRef.push().key!!
             myRef.child(pushKey).setValue(chatt)
@@ -75,14 +143,17 @@ class ChattActivity : AppCompatActivity() {
 
 
     fun retriveMessage(){
-        var personalId = intent.getStringExtra("PERSONAL ID")
-        Log.w("toChatt", "Team Id get Extra :" + personalId)
+
+
+        val chattUserName = intent.extras.getString("USER_NAME")
 
 
 
-
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val userId = intent.extras.getString("USER_ID")
+        val firebaseUser = firebaseAuth.currentUser?.uid
         val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("Chatt")
+        val myRef = db.getReference("${"Chatt => " +userId + chattUserName}")
 
 
 

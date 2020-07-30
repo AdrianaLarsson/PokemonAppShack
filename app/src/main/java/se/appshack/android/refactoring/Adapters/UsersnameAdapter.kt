@@ -50,7 +50,8 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
 
        var userName = p0.itemView.findViewById<TextView>(R.id.userName)
 
-         userName.text =  userNameClass[p1].userName
+
+        userName.text = userNameClass[p1].userName
 
 
         p0.itemView.setOnClickListener {
@@ -58,6 +59,8 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
             val intent = Intent()
             intent.setClass(context, ChattActivity::class.java)
             intent.putExtra("USER_NAME", userNameClass[p1].userName)
+            intent.putExtra("USER_ID", userNameClass[p1].userId)
+
             context.startActivity(intent)
 
         }

@@ -9,8 +9,10 @@ data class UserNameClass(
 
 
         @field:SerializedName("userName")
-        val userName: String? = null
+        val userName: String? = null,
 
+        @field:SerializedName("userId")
+           val userId: String? = null
 
 
 
