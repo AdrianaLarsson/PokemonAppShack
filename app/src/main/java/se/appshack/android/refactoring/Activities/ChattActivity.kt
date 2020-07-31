@@ -98,7 +98,7 @@ lateinit var auth: FirebaseAuth
 
     fun sendMessage() {
 
-
+    
         val userId = intent.extras.getString("USER_ID")
 
         val chattUserName = intent.extras.getString("USER_NAME")
@@ -153,7 +153,7 @@ lateinit var auth: FirebaseAuth
         val userId = intent.extras.getString("USER_ID")
         val firebaseUser = firebaseAuth.currentUser?.uid
         val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("${"Chatt => " +userId + chattUserName}")
+        val myRef = db.getReference("${"Chatt => " + userId + chattUserName}")
 
 
 

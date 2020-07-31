@@ -29,6 +29,7 @@ import se.appshack.android.refactoring.R
 
 class UsersnameAdapter (var context: Context, var userNameClass: List  <UserNameClass>): RecyclerView.Adapter<UsersnameAdapter.ViewHolder>() {
 
+    lateinit var auth: FirebaseAuth
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
@@ -48,10 +49,17 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
 
+        auth =  FirebaseAuth.getInstance()
+
+        var currentUserId = auth.currentUser!!.uid
+
        var userName = p0.itemView.findViewById<TextView>(R.id.userName)
 
 
         userName.text = userNameClass[p1].userName
+
+
+
 
 
         p0.itemView.setOnClickListener {
@@ -60,6 +68,8 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
             intent.setClass(context, ChattActivity::class.java)
             intent.putExtra("USER_NAME", userNameClass[p1].userName)
             intent.putExtra("USER_ID", userNameClass[p1].userId)
+            intent.putExtra("CURRENTUSER_UID", currentUserId)
+
 
             context.startActivity(intent)
 
@@ -67,6 +77,12 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
 
 
 
+    }
+
+
+    fun updateList(list: MutableList<UserNameClass>){
+        userNameClass = list
+        notifyDataSetChanged()
     }
 
 
