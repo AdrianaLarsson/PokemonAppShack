@@ -56,9 +56,29 @@ class SignInActivity : AppCompatActivity() {
             var sizePas =  passwordSign.textSize.toInt()
 
             if (sizePas <= 6){
-                passwordSign.error = "Lösenordet måste vara mer än sex tecken"
+                passwordSign.error = "The password must be more than six characters long"
             }
             passwordSign.requestFocus()
+            return
+        }
+
+
+        if (userNameSignIn.text.toString().isEmpty()) {
+            userNameSignIn.error = "Please enter Username"
+            userNameSignIn.requestFocus()
+            return
+        }
+
+
+        if (firstNameSign.text.toString().isEmpty()) {
+            firstNameSign.error = "Please enter Firstname"
+            firstNameSign.requestFocus()
+            return
+        }
+
+        if (lastNameSign.text.toString().isEmpty()) {
+            lastNameSign.error = "Please enter Lastname"
+            lastNameSign.requestFocus()
             return
         }
 
