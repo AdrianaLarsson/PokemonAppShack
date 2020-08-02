@@ -10,22 +10,23 @@
     android:padding="8dp">
 
 
-
     <TextView
         android:id="@+id/showName"
-        android:layout_width="241dp"
-        android:layout_height="20dp"
+        android:layout_width="203dp"
+        android:layout_height="26dp"
         android:layout_marginBottom="4dp"
+        android:gravity="left"
         android:text="Namn"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/showMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.888" />
-
 
 
     <TextView

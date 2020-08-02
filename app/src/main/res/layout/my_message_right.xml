@@ -9,7 +9,6 @@
     android:padding="8dp">
 
 
-
     <TextView
         android:id="@+id/showName"
         android:layout_width="241dp"
@@ -18,6 +17,7 @@
         android:text="Namn"
         android:textAlignment="center"
         android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/showMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.929"
@@ -29,7 +29,7 @@
         android:id="@+id/showMessage"
         android:layout_width="200dp"
         android:layout_height="57dp"
-        android:layout_marginLeft="1dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/my_message"
         android:maxLines="110000"
         android:padding="5dp"
