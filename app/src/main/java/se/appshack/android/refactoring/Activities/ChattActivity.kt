@@ -166,7 +166,7 @@ lateinit var auth: FirebaseAuth
                     "${fromCurrentfirebaseUserId}",
                     "${messageUser.text}",
                     "${fromCurrentfirebaseUserId}",
-                    "${reference.key}"
+                    "${name}"
             )
                     reference.setValue(chatt)
                     .addOnSuccessListener {
@@ -206,7 +206,7 @@ lateinit var auth: FirebaseAuth
                     val message = dataSnapshot.getValue(ChattClass::class.java)
                     Log.w("Messsss ", "Messaggeee :::: " +message)
 
-                    messagePerson.add(message.message!!)
+                    messagePerson.add(message!!)
 
 
 
