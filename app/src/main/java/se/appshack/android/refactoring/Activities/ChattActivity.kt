@@ -190,78 +190,25 @@ lateinit var auth: FirebaseAuth
     }
 
 
+
     fun retriveMessage(){
+
         val fromCurrentUserId = FirebaseAuth.getInstance().currentUser?.uid
         val toUserId = intent.extras.getString("USER_ID")
         val myRef = FirebaseDatabase.getInstance().getReference("/user-chatts/$fromCurrentUserId/$toUserId")
 
-        myRef.addChildEventListener(object : ChildEventListener {
-
-            override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
-
-
-                var messagePerson = ArrayList<ChattClass>()
-
-                for (messageSnapshot in dataSnapshot.children) {
-                    val message = dataSnapshot.getValue(ChattClass::class.java)
-                    Log.w("Messsss ", "Messaggeee :::: " +message)
-
-                    messagePerson.add(message!!)
-
-
-
-
-
-            }
-                globalMessageList = messagePerson
-                setUpTheRecyclerview()
-
-
-            }
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-
-            }
-
-
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-
-            }
-
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-
-
-        })
-
-
-
-
-/*        val firebaseAuth = FirebaseAuth.getInstance()
-
-        val toUserId = intent.extras.getString("USER_ID")
-        val fromCurrentUserId = firebaseAuth.currentUser?.uid
-
-        val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("/chatt-message/$fromCurrentUserId/$toUserId")
-
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
 
                 var messagePerson = ArrayList<ChattClass>()
 
                 for (messageSnapshot in dataSnapshot.children) {
                     val message = messageSnapshot.getValue(ChattClass::class.java)
+                    Log.w("Messsss ", "Messaggeee :::: " +message)
+
                     messagePerson.add(message!!)
 
                 }
-
                 globalMessageList = messagePerson
                 setUpTheRecyclerview()
             }
@@ -269,64 +216,17 @@ lateinit var auth: FirebaseAuth
             override fun onCancelled(databaseError: DatabaseError) {
 
             }
-        })*/
-/*
-        val chattUserName = intent.extras.getString("USER_NAME")
-
-
-
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val userId = intent.extras.getString("USER_ID")
-        val firebaseUser = firebaseAuth.currentUser?.uid
-        val db = FirebaseDatabase.getInstance()
-        val myRef = db.getReference("Chatt")
-
-
-
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                val value = dataSnapshot.getValue(ChattClass::class.java)
-                //   Log.d("DataSnapshot : ", "Value IS: " + value!!)
-
-                var messagePerson = ArrayList<ChattClass>()
-
-                for (messageSnapshot in dataSnapshot.children) {
-                    val message = messageSnapshot.getValue(ChattClass::class.java)
-                    messagePerson.add(message!!)
-
-                }
-
-                globalMessageList = messagePerson
-                setUpTheRecyclerview()
-                var messageList = ArrayList<String>()
-
-
-                Log.w("Message", "ARRAYLIST!!!" + messagePerson)
-
-                for (p in messagePerson){
-
-                    messageList.add(p.message.toString())
-
-
-
-                    // personalFirstNameChatt.text = firstNameArray.toString()
-                    Log.w("SUCCESSS", "ARRAYLIST!!!" + messageList)
-
-
-
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("ERROR", "Failed to read value.", error.toException())
-            }
-        })*/
+        })
 
 
     }
+
+
+
+
+
+
+
 
     fun setUpTheRecyclerview(){
 
