@@ -39,8 +39,8 @@
             android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="390dp"
-            android:layout_height="140dp"
+            android:layout_width="379dp"
+            android:layout_height="98dp"
             android:layout_marginTop="24dp"
             android:gravity="center"
             android:orientation="horizontal"
@@ -48,16 +48,16 @@
 
             <ImageView
                 android:id="@+id/imageFront"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="108dp"
+                android:layout_height="78dp"
                 android:padding="8dp"
 
                 android:scaleType="fitCenter" />
 
             <ImageView
                 android:id="@+id/imageBack"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="111dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="24dp"
                 android:padding="8dp"
                 android:scaleType="fitCenter" />

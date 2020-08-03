@@ -3,7 +3,7 @@
     <string name="app_name">Pokemon</string>
     <string name="title_activity_main">Pokemon list</string>
     <string name="title_activity_pokemon_details">Pokemon details</string>
-    <string name="title_activity_login">Login</string>
+    <string name="title_activity_login">Pokemon</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>

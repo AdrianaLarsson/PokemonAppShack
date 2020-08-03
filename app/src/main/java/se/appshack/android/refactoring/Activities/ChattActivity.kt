@@ -46,11 +46,6 @@ lateinit var auth: FirebaseAuth
     fun showUserInfo(){
 
         val userId = intent.extras.getString("USER_ID")
-
-        val firebaseAuth = FirebaseAuth.getInstance()
-
-
-
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference("Usernames")
         val userRef = myRef.child(userId)
