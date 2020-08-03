@@ -1,6 +1,7 @@
 package se.appshack.android.refactoring.Activities
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
@@ -43,6 +44,13 @@ class GameActivity : AppCompatActivity() {
         moveBackground()
 
 information()
+
+
+        backBtn.setOnClickListener {
+
+            val intent = Intent(this, MyPokemonListActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

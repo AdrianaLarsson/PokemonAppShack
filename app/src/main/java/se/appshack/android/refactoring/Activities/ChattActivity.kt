@@ -1,5 +1,6 @@
 package se.appshack.android.refactoring.Activities
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -33,6 +34,11 @@ lateinit var auth: FirebaseAuth
         sendMessage()
 
         retriveMessage()
+
+        userNameChatt.setOnClickListener {
+            val intent = Intent(this, AllUsersActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
