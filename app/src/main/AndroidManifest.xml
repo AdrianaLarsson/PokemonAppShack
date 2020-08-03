@@ -15,14 +15,20 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Activities.ChattActivity"></activity>
-        <activity android:name=".Activities.AllUsersActivity" />
+        <activity android:name=".Activities.ChattActivity"
+            android:screenOrientation="portrait">>
+
+
+        </activity>
+        <activity android:name=".Activities.AllUsersActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activities.GameActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".Activities.SignInActivity" />
         <activity
             android:name=".Activities.LoginActivity"
+            android:screenOrientation="portrait">
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
