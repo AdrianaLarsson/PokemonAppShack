@@ -20,7 +20,6 @@ import se.appshack.android.refactoring.R
 class GameActivity : AppCompatActivity() {
 
 
-
     private var mainLayout: ViewGroup? = null
     private lateinit var image: ImageView
 
@@ -43,7 +42,7 @@ class GameActivity : AppCompatActivity() {
 
         moveBackground()
 
-information()
+        information()
 
 
         backBtn.setOnClickListener {
@@ -78,8 +77,6 @@ information()
     }
 
 
-
-
     private fun onTouchListener(): View.OnTouchListener? {
 
         val pokemonUrl = intent.extras.getString("POKEMON_URL")
@@ -108,8 +105,6 @@ information()
                     view.layoutParams = layoutParams
 
 
-
-
                 }
             }
             mainLayout!!.invalidate()
@@ -120,29 +115,22 @@ information()
     }
 
 
+    fun information() {
 
 
-fun information(){
+        val pokemonH = intent.extras.getString("POKEMON_HEIGHT")
+        val pokemonW = intent.extras.getString("POKEMON_WEIGHT")
+        val pokemonNu = intent.extras.getString("POKEMON_NUMBER")
+        val pokemonNa = intent.extras.getString("POKEMON_NAME")
 
 
+        pokemonHeight.text = pokemonH
+        pokemonWeight.text = pokemonW
+        pokemonNumber.text = pokemonNu
+        pokemonName.text = "# " + pokemonNa
 
 
-    val pokemonH = intent.extras.getString("POKEMON_HEIGHT")
-    val pokemonW = intent.extras.getString("POKEMON_WEIGHT")
-    val pokemonNu = intent.extras.getString("POKEMON_NUMBER")
-    val pokemonNa = intent.extras.getString("POKEMON_NAME")
-
-
-    pokemonHeight.text = pokemonH
-    pokemonWeight.text = pokemonW
-    pokemonNumber.text = pokemonNu
-    pokemonName.text =  "# " + pokemonNa
-
-
-
-
-}
-
+    }
 
 
 }

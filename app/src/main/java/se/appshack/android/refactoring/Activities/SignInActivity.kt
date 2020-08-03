@@ -16,7 +16,7 @@ import se.appshack.android.refactoring.R
 
 class SignInActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
-    lateinit var userId : String
+    lateinit var userId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
@@ -38,7 +38,6 @@ class SignInActivity : AppCompatActivity() {
     private fun signUpUser() {
 
 
-
         if (emailSign.text.toString().isEmpty()) {
             emailSign.error = "Please enter email"
             emailSign.requestFocus()
@@ -53,9 +52,9 @@ class SignInActivity : AppCompatActivity() {
 
         if (passwordSign.text.toString().isEmpty()) {
             passwordSign.error = "Please enter password"
-            var sizePas =  passwordSign.textSize.toInt()
+            var sizePas = passwordSign.textSize.toInt()
 
-            if (sizePas <= 6){
+            if (sizePas <= 6) {
                 passwordSign.error = "The password must be more than six characters long"
             }
             passwordSign.requestFocus()
@@ -86,7 +85,7 @@ class SignInActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
 
-                         userId = auth!!.currentUser!!.uid
+                        userId = auth!!.currentUser!!.uid
                         Log.w("USERUID", "User Uid " + userId)
                         val intent = Intent(this, MySideSettingsActivity::class.java)
 
@@ -100,7 +99,6 @@ class SignInActivity : AppCompatActivity() {
                                 "${lastNameSign.text}",
                                 "${emailSign.text}",
                                 "${userNameSignIn.text}"
-
 
 
                         )
@@ -121,7 +119,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-    fun toLogin(){
+    fun toLogin() {
 
 
         loginAct.setOnClickListener {
@@ -133,9 +131,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
 
-    fun addUser(){
-
-
+    fun addUser() {
 
 
         val db = FirebaseDatabase.getInstance()
@@ -151,9 +147,6 @@ class SignInActivity : AppCompatActivity() {
         myRef.child(userId).setValue(pokemon)
 
     }
-
-
-
 
 
 }

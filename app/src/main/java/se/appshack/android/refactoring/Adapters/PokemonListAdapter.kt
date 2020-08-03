@@ -13,7 +13,7 @@ import se.appshack.android.refactoring.NamedResponseModel
 import se.appshack.android.refactoring.ModelClasses.PokemonSpritesModel
 import se.appshack.android.refactoring.R
 
-class PokemonListAdapter(private val activity: Activity,  private var data: List<NamedResponseModel>) : RecyclerView.Adapter<PokemonViewHolder>() {
+class PokemonListAdapter(private val activity: Activity, private var data: List<NamedResponseModel>) : RecyclerView.Adapter<PokemonViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): PokemonViewHolder {
         return PokemonViewHolder(LayoutInflater.from(activity).inflate(R.layout.viewholder_pokemon_list, null, false))
     }
@@ -40,7 +40,7 @@ class PokemonListAdapter(private val activity: Activity,  private var data: List
         return data.size
     }
 
-    fun updateList(list: MutableList<NamedResponseModel>){
+    fun updateList(list: MutableList<NamedResponseModel>) {
         data = list
         notifyDataSetChanged()
     }
@@ -55,11 +55,9 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val formattedName = pokemon.name!!.substring(0, 1).toUpperCase() + pokemon.name!!.substring(1)
         (itemView.findViewById<View>(R.id.pokemon_name) as TextView).text = formattedName
 
-        var spritesModel= PokemonSpritesModel()
+        var spritesModel = PokemonSpritesModel()
 
         Log.w("URL", "spritesModel.urlBack " + spritesModel.urlBack)
-
-
 
 
     }
@@ -67,8 +65,6 @@ class PokemonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun setOnClickListener(listener: View.OnClickListener?) {
         itemView.setOnClickListener(listener)
     }
-
-
 
 
 }

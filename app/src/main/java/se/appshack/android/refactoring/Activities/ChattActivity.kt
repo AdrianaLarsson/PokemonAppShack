@@ -20,10 +20,10 @@ import se.appshack.android.refactoring.ModelClasses.UserNameClass
 import se.appshack.android.refactoring.R
 
 class ChattActivity : AppCompatActivity() {
-    var  globalMessageList : List<ChattClass>? =null
-    lateinit var adapter : ChattAdapter
-lateinit var auth: FirebaseAuth
-    var name : String? = null
+    var globalMessageList: List<ChattClass>? = null
+    lateinit var adapter: ChattAdapter
+    lateinit var auth: FirebaseAuth
+    var name: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,7 @@ lateinit var auth: FirebaseAuth
     }
 
 
-    fun showUserInfo(){
+    fun showUserInfo() {
 
         val userId = intent.extras.getString("USER_ID")
         val db = FirebaseDatabase.getInstance()
@@ -65,8 +65,6 @@ lateinit var auth: FirebaseAuth
     }
 
 
-
-
     fun currentUserInfo() {
 
 
@@ -75,13 +73,11 @@ lateinit var auth: FirebaseAuth
         var userNode = firebaseUser!!.uid
 
 
-
-
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference("Users")
         val userRef = myRef.child(auth.currentUser!!.uid)
 
-        userRef.addValueEventListener(object : ValueEventListener{
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.w("ERROR", "Failed to read value.")
 
@@ -89,58 +85,13 @@ lateinit var auth: FirebaseAuth
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-               name = dataSnapshot.child("userName").value as String
+                name = dataSnapshot.child("userName").value as String
 
             }
 
 
         })
     }
-/*
-
-    fun sendMessage() {
-
-
-        val toUserId = intent.extras.getString("USER_ID")
-
-        val chattUserName = intent.extras.getString("USER_NAME")
-
-
-      //  userNameChatt.text = chattUserName
-        var messagefromUser : EditText?
-        var messageBtnSend : ImageButton?
-        messageBtnSend = findViewById(R.id.sendMessageButton)
-
-        messagefromUser = findViewById(R.id.messageUser)
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val fromFirebaseUser = firebaseAuth.currentUser?.uid
-
-        val db = FirebaseDatabase.getInstance()
-
-
-        val reference = db.getReference("user-chatt/Adriana/Larsson")
-         val torefrence = db.getReference("user-chatt/Marie/Kristoffersson")
-        currentUserInfo()
-
-        val chattmassage = ChattClass(reference.key, "${messagefromUser.text}", fromFirebaseUser, toUserId)
-        messageBtnSend?.setOnClickListener {
-           Log.w("Sending", "Message send")
-            val chatt = ChattClass("${fromFirebaseUser}",
-                    "${messagefromUser.text}",
-                    "${toUserId}",
-                    "${name}"
-
-            )
-
-           reference.setValue(chatt)
-
-
-            torefrence.setValue(chatt)
-
-
-         }
-    }
-*/
 
 
     fun sendMessage() {
@@ -148,12 +99,12 @@ lateinit var auth: FirebaseAuth
         currentUserInfo()
 
 
-        var messagefromUser : EditText?  = findViewById(R.id.messageUser)
+        var messagefromUser: EditText? = findViewById(R.id.messageUser)
         val toUserId = intent.extras.getString("USER_ID")
         val firebaseAuth = FirebaseAuth.getInstance()
         val fromCurrentfirebaseUserId = firebaseAuth.currentUser?.uid
 
-        var messageBtnSend : ImageButton? =findViewById(R.id.sendMessageButton)
+        var messageBtnSend: ImageButton? = findViewById(R.id.sendMessageButton)
         val db = FirebaseDatabase.getInstance()
         val reference = db.getReference("/user-chatts/$fromCurrentfirebaseUserId/$toUserId").push()
         val torefrence = db.getReference("/user-chatts/$toUserId/$fromCurrentfirebaseUserId").push()
@@ -169,7 +120,7 @@ lateinit var auth: FirebaseAuth
                     "${fromCurrentfirebaseUserId}",
                     "${name}"
             )
-                    reference.setValue(chatt)
+            reference.setValue(chatt)
                     .addOnSuccessListener {
                         messagefromUser!!.text.clear()
 
@@ -177,7 +128,8 @@ lateinit var auth: FirebaseAuth
                         Log.w("SEND", "Message has been send ${reference.key}")
                     }
 
-                    .addOnFailureListener {it.message
+                    .addOnFailureListener {
+                        it.message
 
                         Log.w("FAILURE", "Message has not been send ${it.message}")
 
@@ -191,8 +143,7 @@ lateinit var auth: FirebaseAuth
     }
 
 
-
-    fun retriveMessage(){
+    fun retriveMessage() {
 
         val fromCurrentUserId = FirebaseAuth.getInstance().currentUser?.uid
         val toUserId = intent.extras.getString("USER_ID")
@@ -205,7 +156,7 @@ lateinit var auth: FirebaseAuth
 
                 for (messageSnapshot in dataSnapshot.children) {
                     val message = messageSnapshot.getValue(ChattClass::class.java)
-                    Log.w("Messsss ", "Messaggeee :::: " +message)
+                    Log.w("Messsss ", "Messaggeee :::: " + message)
 
                     messagePerson.add(message!!)
 
@@ -223,13 +174,7 @@ lateinit var auth: FirebaseAuth
     }
 
 
-
-
-
-
-
-
-    fun setUpTheRecyclerview(){
+    fun setUpTheRecyclerview() {
 
         Log.w("Messages", "ARRAYLIST!!!" + globalMessageList)
 

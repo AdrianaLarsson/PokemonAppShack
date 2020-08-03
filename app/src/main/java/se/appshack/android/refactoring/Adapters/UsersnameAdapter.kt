@@ -23,18 +23,14 @@ import se.appshack.android.refactoring.ModelClasses.UserNameClass
 import se.appshack.android.refactoring.R
 
 
-
-
-
-
-class UsersnameAdapter (var context: Context, var userNameClass: List  <UserNameClass>): RecyclerView.Adapter<UsersnameAdapter.ViewHolder>() {
+class UsersnameAdapter(var context: Context, var userNameClass: List<UserNameClass>) : RecyclerView.Adapter<UsersnameAdapter.ViewHolder>() {
 
     lateinit var auth: FirebaseAuth
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
 
-        var view = LayoutInflater.from(context).inflate(R.layout.list_usernames, p0,false)
-        return  ViewHolder(view)
+        var view = LayoutInflater.from(context).inflate(R.layout.list_usernames, p0, false)
+        return ViewHolder(view)
     }
 
 
@@ -43,17 +39,13 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
     }
 
 
-
-
-
-
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
 
-        auth =  FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
 
         var currentUserId = auth.currentUser!!.uid
 
-       var userName = p0.itemView.findViewById<TextView>(R.id.userName)
+        var userName = p0.itemView.findViewById<TextView>(R.id.userName)
 
 
         userName.text = userNameClass[p1].userName
@@ -76,18 +68,16 @@ class UsersnameAdapter (var context: Context, var userNameClass: List  <UserName
         }
 
 
-
     }
 
 
-    fun updateList(list: MutableList<UserNameClass>){
+    fun updateList(list: MutableList<UserNameClass>) {
         userNameClass = list
         notifyDataSetChanged()
     }
 
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
     }

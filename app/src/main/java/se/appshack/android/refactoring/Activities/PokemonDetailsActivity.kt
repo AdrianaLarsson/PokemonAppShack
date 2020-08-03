@@ -48,6 +48,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
     }
+
     internal inner class GetPokemonDetailsTask : AsyncTask<String?, Void?, PokemonDetailsResponse?>() {
         override fun doInBackground(vararg urls: String?): PokemonDetailsResponse? {
             val client = OkHttpClient()
@@ -57,7 +58,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
                     .addHeader("Content-Type", "application/json; charset=utf8")
                     .build()
 
-          Log.w("URLS ", "URLSSS " + urls[0].toString())
+            Log.w("URLS ", "URLSSS " + urls[0].toString())
             var response: PokemonDetailsResponse? = null
             try {
                 val httpResponse = client.newCall(request).execute()
@@ -76,12 +77,11 @@ class PokemonDetailsActivity : AppCompatActivity() {
 
 
             val imageFront = findViewById<View>(R.id.imageFront) as ImageView
-         Picasso.with(this@PokemonDetailsActivity).load(result!!.sprites?.urlFront).into(imageFront)
+            Picasso.with(this@PokemonDetailsActivity).load(result!!.sprites?.urlFront).into(imageFront)
             val imageBack = findViewById<View>(R.id.imageBack) as ImageView
             Picasso.with(this@PokemonDetailsActivity).load(result.sprites?.urlBack).into(imageBack)
 
             (findViewById<View>(R.id.pokemonNumber) as TextView).text = String.format("#%s", result.id)
-
 
 
             val formattedName = result.name?.substring(0, 1)?.toUpperCase() + result.name?.substring(1)
@@ -94,15 +94,12 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 if (i < result!!.types!!.size - 1) types += ", "
 
 
-
-
             }
             textSize()
             (findViewById<View>(R.id.pokemonTypes) as TextView).text = types
             (findViewById<View>(R.id.pokemonHeight) as TextView).text = String.format("%s decimetres", result.height)
             (findViewById<View>(R.id.pokemonWeight) as TextView).text = String.format("%s hectograms", result.weight)
             GetPokemonSpeciesDetailsTask().execute(result.species?.url)
-
 
 
             //add info about pokemon in firebase
@@ -122,13 +119,11 @@ class PokemonDetailsActivity : AppCompatActivity() {
             }
 
 
-
-
         }
 
 
-
     }
+
     internal inner class GetPokemonSpeciesDetailsTask : AsyncTask<String?, Void?, PokemonSpeciesResponse?>() {
         override fun doInBackground(vararg urls: String?): PokemonSpeciesResponse? {
 
@@ -161,10 +156,10 @@ class PokemonDetailsActivity : AppCompatActivity() {
             (findViewById<View>(R.id.pokemonSpecies) as TextView).text = genus
             findViewById<View>(R.id.loader).visibility = View.GONE
         }
-        }
+    }
 
-//back button to recyclerview
-    fun btnbackMainAct(){
+    //back button to recyclerview
+    fun btnbackMainAct() {
 
         backImgV.setOnClickListener {
 
@@ -174,17 +169,16 @@ class PokemonDetailsActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     //changes text size
-    fun textSize(){
+    fun textSize() {
 
         pokemonNumber.setOnClickListener {
             pokemonNumber.textSize = 30F
 
         }
-        if (pokemonNumber.textSize.equals(60F)){
+        if (pokemonNumber.textSize.equals(60F)) {
             pokemonNumber.setOnClickListener {
                 pokemonNumber.textSize = 16F
             }
@@ -194,23 +188,23 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
     //animation to the images
-    fun imageAni(){
+    fun imageAni() {
 
-            val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.animation)
-            imageFront.startAnimation(anim)
-            imageBack.startAnimation(anim)
-
-
-       }
-
-//add/post/save to realtime database pokemon
-    fun postToRealTimeFirebase(name : String, number : String, types: String, height : String , weight : String , imageFront: String, imageBack : String){
+        val anim = AnimationUtils.loadAnimation(applicationContext, R.anim.animation)
+        imageFront.startAnimation(anim)
+        imageBack.startAnimation(anim)
 
 
-    val firebaseAuth = FirebaseAuth.getInstance()
-    val firebaseUser = firebaseAuth.currentUser
-    var userNode = firebaseUser!!.uid
-    Log.w("Tag"," UserId : =====>>>> " + userNode)
+    }
+
+    //add/post/save to realtime database pokemon
+    fun postToRealTimeFirebase(name: String, number: String, types: String, height: String, weight: String, imageFront: String, imageBack: String) {
+
+
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val firebaseUser = firebaseAuth.currentUser
+        var userNode = firebaseUser!!.uid
+        Log.w("Tag", " UserId : =====>>>> " + userNode)
 
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference(userNode)
@@ -233,19 +227,7 @@ class PokemonDetailsActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
 }
-
-
-
-
-
-
-
-
 
 
 /*

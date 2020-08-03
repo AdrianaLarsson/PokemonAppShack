@@ -34,19 +34,18 @@ class MyPokemonListActivity : AppCompatActivity() {
 
         readPokemonListFromFirebase()
         navigationBar()
-getSearchString()
-
+        getSearchString()
 
 
     }
 
 
-    fun readPokemonListFromFirebase(){
+    fun readPokemonListFromFirebase() {
 
         val firebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser = firebaseAuth.currentUser
         var userNode = firebaseUser!!.uid
-        Log.w("Tag"," UserId : =====>>>> " + userNode)
+        Log.w("Tag", " UserId : =====>>>> " + userNode)
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference("${userNode}")
         myRef.addValueEventListener(object : ValueEventListener {
@@ -71,7 +70,7 @@ getSearchString()
 
 
 
-                if (pokemonList.isEmpty()){
+                if (pokemonList.isEmpty()) {
 
                     Log.w("EMPTY", "Pokemon list is empty")
 
@@ -79,7 +78,7 @@ getSearchString()
 
                 }
                 val layoutManager = LinearLayoutManager(this@MyPokemonListActivity)
-               layoutManager.orientation = LinearLayoutManager.VERTICAL
+                layoutManager.orientation = LinearLayoutManager.VERTICAL
                 recyView.layoutManager = layoutManager
                 pokemonFirebaseAdapter = FirebasePokemonAdapter(this@MyPokemonListActivity, pokemonList)
                 recyView.adapter = pokemonFirebaseAdapter
@@ -92,20 +91,16 @@ getSearchString()
 
             override fun onCancelled(error: DatabaseError) {
 
-                }
+            }
         })
-
-
-
 
 
     }
 
 
-
     fun getSearchString() {
 
-       //get the text when the user writes something in editext
+        //get the text when the user writes something in editext
         var editTxtS = findViewById<EditText>(R.id.searchMylist)
 
         editTxtS.addTextChangedListener(object : TextWatcher {
@@ -141,9 +136,7 @@ getSearchString()
     }
 
 
-
-
-    fun navigationBar(){
+    fun navigationBar() {
 
         var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationMyList)
         navigationView.selectedItemId = R.id.myMyPokemonList
@@ -161,10 +154,6 @@ getSearchString()
                 }
 
 
-
-
-
-
             }
             when (it.itemId) {
                 R.id.settings -> {
@@ -175,7 +164,6 @@ getSearchString()
 
                     return@OnNavigationItemSelectedListener true
                 }
-
 
 
             }
@@ -194,7 +182,6 @@ getSearchString()
 
             }
             true
-
 
 
         })

@@ -36,7 +36,7 @@ class AllUsersActivity : AppCompatActivity() {
     }
 
 
-    fun getUser(){
+    fun getUser() {
 
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference("Usernames")
@@ -61,8 +61,6 @@ class AllUsersActivity : AppCompatActivity() {
                 Log.w("SUCCESSS", "ARRAYLIST!!!" + userList)
 
 
-
-
                 val layoutManager = LinearLayoutManager(this@AllUsersActivity)
                 layoutManager.orientation = LinearLayoutManager.VERTICAL
                 recyView.layoutManager = layoutManager
@@ -84,12 +82,7 @@ class AllUsersActivity : AppCompatActivity() {
         })
 
 
-
-
-
-
     }
-
 
 
     fun getSearchString() {
@@ -128,7 +121,6 @@ class AllUsersActivity : AppCompatActivity() {
         }
         usersnameAdapter.updateList(tempList)
     }
-
 
 
     fun navigationBar() {
@@ -193,11 +185,6 @@ class AllUsersActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
-
 
 
 }

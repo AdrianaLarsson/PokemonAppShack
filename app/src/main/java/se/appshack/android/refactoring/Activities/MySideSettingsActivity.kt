@@ -24,22 +24,19 @@ class MySideSettingsActivity : AppCompatActivity() {
 
 
 
-showUserInfo()
+        showUserInfo()
 
 
         val firebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser = firebaseAuth.currentUser
         var userNode = firebaseUser!!.uid
-        Log.w("Tag"," UserId : =====>>>> " + userNode)
+        Log.w("Tag", " UserId : =====>>>> " + userNode)
 
 
     }
 
 
-
-
-
-    fun navigationBar(){
+    fun navigationBar() {
 
         var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationSetting)
         navigationView.selectedItemId = R.id.settings
@@ -57,10 +54,6 @@ showUserInfo()
                 }
 
 
-
-
-
-
             }
             when (it.itemId) {
                 R.id.searchPokemon -> {
@@ -71,8 +64,6 @@ showUserInfo()
 
                     return@OnNavigationItemSelectedListener true
                 }
-
-
 
 
             }
@@ -98,7 +89,7 @@ showUserInfo()
     }
 
 
-    fun signOut(){
+    fun signOut() {
 
 
         signOut.setOnClickListener {
@@ -120,12 +111,11 @@ showUserInfo()
         email.text = firebaseUser.email
 
 
-
         val db = FirebaseDatabase.getInstance()
         val myRef = db.getReference("Users")
         val userRef = myRef.child(firebaseUser.uid)
 
-        userRef.addValueEventListener(object : ValueEventListener{
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
                 Log.w("ERROR", "Failed to read value.")
 
@@ -137,9 +127,6 @@ showUserInfo()
                 lastName.text = dataSnapshot.child("lastName").value as String
                 userName.text = dataSnapshot.child("userName").value as String
                 email.text = dataSnapshot.child("email").value as String
-
-
-
 
 
             }

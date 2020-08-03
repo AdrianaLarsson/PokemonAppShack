@@ -46,21 +46,21 @@ class LoginActivity : AppCompatActivity() {
 
     private fun doLogin() {
 
-        if (emailLogin.text.toString().isEmpty()){
+        if (emailLogin.text.toString().isEmpty()) {
 
             emailLogin.error = "Please enter your Email "
             emailLogin.requestFocus()
             return
         }
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(emailLogin.text.toString()).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailLogin.text.toString()).matches()) {
 
             emailLogin.error = "Please write the correct Email"
             emailLogin.requestFocus()
             return
         }
 
-        if (passwordLogin.text.toString().isEmpty()){
+        if (passwordLogin.text.toString().isEmpty()) {
 
             passwordLogin.error = "Please enter your password"
             passwordLogin.requestFocus()
@@ -79,31 +79,31 @@ class LoginActivity : AppCompatActivity() {
                         val user = auth.currentUser
                         updateUI(user)
 
-                        Toast.makeText(this,"You are now logged in",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "You are now logged in", Toast.LENGTH_SHORT).show()
                     } else {
 
                         //Log.w("TAG", "signInWithEmail:failure", task.exception!!.message, Toast.LENGTH_SHORT).show()
 
-                    var passwordInv= task.exception!!.message
+                        var passwordInv = task.exception!!.message
 
-                   if (passwordInv.equals("The password is invalid or the user does not have a password.")){
+                        if (passwordInv.equals("The password is invalid or the user does not have a password.")) {
 
-                       Log.w("Error Auth","Lösenordet är inte korrekt")
-                       passwordLogin.error = "The password is incorrect"
+                            Log.w("Error Auth", "Lösenordet är inte korrekt")
+                            passwordLogin.error = "The password is incorrect"
 
-                   }else if (passwordInv.equals("We have blocked all requests from this device due to unusual activity. Try again later. [ Too many unsuccessful login attempts. Please try again later. ]")){
+                        } else if (passwordInv.equals("We have blocked all requests from this device due to unusual activity. Try again later. [ Too many unsuccessful login attempts. Please try again later. ]")) {
 
-                       Log.w("Error Auth","Vi har blockerat alla förfrågningar från den här enheten på grund av ovanlig aktivitet. Försök igen senare. [För många misslyckade inloggningsförsök. Vänligen försök igen senare. ]")
+                            Log.w("Error Auth", "Vi har blockerat alla förfrågningar från den här enheten på grund av ovanlig aktivitet. Försök igen senare. [För många misslyckade inloggningsförsök. Vänligen försök igen senare. ]")
 
-                   }else if (passwordInv.equals("There is no user record corresponding to this identifier. The user may have been deleted.")){
+                        } else if (passwordInv.equals("There is no user record corresponding to this identifier. The user may have been deleted.")) {
 
-                       Log.w("Error Auth","There are no User with this name")
-                       emailLogin.error = "There are no User with this name"
-                   }
+                            Log.w("Error Auth", "There are no User with this name")
+                            emailLogin.error = "There are no User with this name"
+                        }
 
 
                         Toast.makeText(this, "User Authentication Failed: " + task.exception!!.localizedMessage, Toast.LENGTH_SHORT).show()
-                       Log.w("Error Auth", task.exception!!.message.toString())
+                        Log.w("Error Auth", task.exception!!.message.toString())
 
                         updateUI(null)
                     }
@@ -114,15 +114,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun updateUI(currentUser: FirebaseUser?){
+    fun updateUI(currentUser: FirebaseUser?) {
 
-        if (currentUser != null ){
+        if (currentUser != null) {
 
-            startActivity(Intent(this,MySideSettingsActivity::class.java))
+            startActivity(Intent(this, MySideSettingsActivity::class.java))
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             finish()
 
-        }else {
+        } else {
 
 
         }
@@ -140,11 +140,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun toSignInActivity(){
+    fun toSignInActivity() {
 
         signIn.setOnClickListener {
 
-            startActivity(Intent(this,SignInActivity::class.java))
+            startActivity(Intent(this, SignInActivity::class.java))
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
 
         }

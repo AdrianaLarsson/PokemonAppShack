@@ -23,13 +23,12 @@ import se.appshack.android.refactoring.NamedResponseModel
 import se.appshack.android.refactoring.R
 
 
-class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonFirebaseClass>) : RecyclerView.Adapter<FirebasePokemonAdapter.PokemonFirebaseViewHolder>(){
-
+class FirebasePokemonAdapter(var context: Context, var pokeFire: List<PokemonFirebaseClass>) : RecyclerView.Adapter<FirebasePokemonAdapter.PokemonFirebaseViewHolder>() {
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PokemonFirebaseViewHolder {
 
-        var view = LayoutInflater.from(context).inflate(R.layout.pokemon_firebase_list, p0,false)
+        var view = LayoutInflater.from(context).inflate(R.layout.pokemon_firebase_list, p0, false)
 
         return PokemonFirebaseViewHolder(view)
 
@@ -41,14 +40,13 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
     }
 
 
-    fun updateList(list: MutableList<PokemonFirebaseClass>){
+    fun updateList(list: MutableList<PokemonFirebaseClass>) {
         pokeFire = list
         notifyDataSetChanged()
     }
 
 
     override fun onBindViewHolder(holder: PokemonFirebaseViewHolder, position: Int) {
-
 
 
         var pokemons = pokeFire[position]
@@ -59,14 +57,14 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
         pName.text = pokemons.name!!.substring(0, 1).toUpperCase() + pokemons.name!!.substring(1)
         pNumber.text = "# " + pokemons.number
         var imageUrlFront = pokemons.imageFront
-       Picasso.with(context).load(imageUrlFront).into(pimgFront)
+        Picasso.with(context).load(imageUrlFront).into(pimgFront)
 
         var deletePoke = holder.itemView.deletePokemonBtn
 
         val firebaseAuth = FirebaseAuth.getInstance()
         val firebaseUser = firebaseAuth.currentUser
         var userNode = firebaseUser!!.uid
-        Log.w("Tag"," UserId : =====>>>> " + userNode)
+        Log.w("Tag", " UserId : =====>>>> " + userNode)
 
 
 
@@ -99,15 +97,15 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
 
             dialog.show()
 
-            var imgPokePop : ImageView = dialog.findViewById(R.id.imgVPopupDel)
+            var imgPokePop: ImageView = dialog.findViewById(R.id.imgVPopupDel)
             Picasso.with(context).load(imageUrlFront).into(imgPokePop)
 
-            var txtVNamePoke : TextView = dialog.findViewById(R.id.namePokemonDel)
+            var txtVNamePoke: TextView = dialog.findViewById(R.id.namePokemonDel)
             txtVNamePoke.text = pokemons.name!!.substring(0, 1).toUpperCase() + pokemons.name!!.substring(1)
 
 
             //deletes pokemon after asking (in popup) if the user wants delete pokemn in her list
-            var btnDeleteYesBtn : Button? = dialog.findViewById(R.id.deleteBtnPopUp)
+            var btnDeleteYesBtn: Button? = dialog.findViewById(R.id.deleteBtnPopUp)
 
             btnDeleteYesBtn?.setOnClickListener {
                 val db = FirebaseDatabase.getInstance()
@@ -115,7 +113,6 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
                 myRef.child(pokemons.name).removeValue()
                 dialog.dismiss()
             }
-
 
 
             //cancel btn in pop up
@@ -128,19 +125,13 @@ class FirebasePokemonAdapter (var context: Context, var pokeFire : List<PokemonF
             }
 
 
-
-
         }
-
-
-
 
 
     }
 
 
-    class PokemonFirebaseViewHolder(itemPokemon : View) : RecyclerView.ViewHolder(itemPokemon){
-
+    class PokemonFirebaseViewHolder(itemPokemon: View) : RecyclerView.ViewHolder(itemPokemon) {
 
 
     }

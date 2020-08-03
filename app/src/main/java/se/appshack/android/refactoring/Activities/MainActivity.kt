@@ -45,12 +45,10 @@ class MainActivity : AppCompatActivity() {
         navigationBar()
 
 
-      //  var intent = getIntent()
+        //  var intent = getIntent()
         mAuth = FirebaseAuth.getInstance()
 
     }
-
-
 
 
     internal inner class GetPokemonListTask : AsyncTask<Void?, Void?, PokemonListResponse?>() {
@@ -153,8 +151,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     fun navigationBar() {
 
         var navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationAllUser)
@@ -171,8 +167,8 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                   Log.w("Extra", "String extra =>> " + intent.getStringExtra("UserListPokemon"))
-                   // intent.putExtra("POKEMONLIST", list)
+                    Log.w("Extra", "String extra =>> " + intent.getStringExtra("UserListPokemon"))
+                    // intent.putExtra("POKEMONLIST", list)
                     startActivity(intent)
 
                     return@OnNavigationItemSelectedListener true
@@ -220,38 +216,3 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-
-
-
-
-
-/*
-fun testRes(){
-
-
-    val url = "https://pokeapi.co/api/v2/pokemon/?limit=151"
-    val client = OkHttpClient()
-    val request = Request.Builder()
-            .url(url)
-            .get()
-            .build()
-
-    client.newCall(request)
-            .enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.w("onFailure", "Didn't work! ")
-
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    val body = response.body?.string()
-                    Log.w("Success!!", " YES :  " + body)
-
-
-                }
-
-            })
-
-
-
-}*/
